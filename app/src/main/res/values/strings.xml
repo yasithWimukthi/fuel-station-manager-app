@@ -5,4 +5,6 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="or">OR</string>
+    <string name="google_icon">Google</string>
+    <string name="facebook_icon">Facebook</string>
 </resources>
