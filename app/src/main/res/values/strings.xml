@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">fuel station manager app</string>
+    <string name="email">Email</string>
 </resources>
