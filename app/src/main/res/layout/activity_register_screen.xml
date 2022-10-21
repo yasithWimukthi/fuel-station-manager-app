@@ -125,6 +125,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:padding="16dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_selector"
+                android:textColor="@drawable/radio_text"
+                android:elevation="4dp"
                 android:text="Customer" />
 
             <RadioButton
@@ -132,6 +136,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:padding="16dp"
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_selector"
+                android:textColor="@drawable/radio_text"
+                android:elevation="4dp"
                 android:text="Owner" />
 
         </RadioGroup>
