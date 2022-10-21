@@ -8,4 +8,6 @@
     <string name="google_icon">Google</string>
     <string name="facebook_icon">Facebook</string>
     <string name="new_user_register_now">New User? Register Now</string>
+    <string name="already_have_login">Already Have a Login?</string>
+
 </resources>
