@@ -20,18 +20,10 @@ import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
 import com.fuelstationmanagerapp.sql.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterScreen extends AppCompatActivity implements View.OnClickListener{
 
     private final AppCompatActivity activity = RegisterScreen.this;
-
-//    private NestedScrollView nestedScrollView;
-
-//    private TextInputLayout textInputLayoutEmail;
-//    private TextInputLayout textInputLayoutPassword;
-//    private TextInputLayout textInputLayoutConfirmPassword;
 
     private TextView emailErrors;
     private TextView passwordErrors;
@@ -42,7 +34,6 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     private EditText editTextConfirmPassword;
 
     private RadioGroup rg;
-
 
     private Button buttonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
@@ -65,8 +56,6 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      * This method is to initialize views
      */
     private void initViews() {
-//        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
-
         emailErrors = (TextView) findViewById(R.id.emailErrors);
         passwordErrors = (TextView) findViewById(R.id.passwordErrors);
         confPasswordErrors = (TextView) findViewById(R.id.confPasswordErrors);
@@ -83,7 +72,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         rg = (RadioGroup) findViewById(R.id.radioGroup);
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
-//        appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
+//      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
     }
 
     /**
@@ -91,7 +80,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      */
     private void initListeners() {
         buttonRegister.setOnClickListener(this);
-//        appCompatTextViewLoginLink.setOnClickListener(this);
+//      appCompatTextViewLoginLink.setOnClickListener(this);
     }
 
     /**

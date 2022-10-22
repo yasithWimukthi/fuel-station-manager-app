@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
@@ -111,10 +112,13 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 //            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
 //            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
+            Toast.makeText( getBaseContext(), "User login success!",Toast.LENGTH_LONG).show();
 //            startActivity(accountsIntent);
         } else {
             // Snack Bar to show success message that record is wrong
 //            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
+            Toast.makeText( getBaseContext(), "User login failed!",Toast.LENGTH_LONG).show();
+
         }
     }
 
