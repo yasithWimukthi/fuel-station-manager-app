@@ -17,7 +17,7 @@ import com.fuelstationmanagerapp.sql.DatabaseHelper;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener{
 
-    private final AppCompatActivity activity = RegisterScreen.this;
+    private final AppCompatActivity activity = LoginScreen.this;
 
     private TextView emailErrors;
     private TextView passwordErrors;
