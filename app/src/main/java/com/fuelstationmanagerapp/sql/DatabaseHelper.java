@@ -47,4 +47,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         // Create tables again
         onCreate(db);
     }
+
+    /**
+     * This method is to create user record
+     *
+     * @param user
+     */
+    public void addUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_EMAIL, user.getEmail());
+        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        // Inserting Row
+        db.insert(TABLE_USER, null, values);
+        db.close();
+    }
 }
