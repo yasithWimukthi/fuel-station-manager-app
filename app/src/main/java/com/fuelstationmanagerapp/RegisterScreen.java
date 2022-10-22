@@ -128,6 +128,9 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         if (!inputValidation.isInputEditTextFilled(editTextEmail, emailErrors, getString(R.string.email_empty))) {
             return;
         }
+        if (!inputValidation.isInputEditTextEmail(editTextEmail, emailErrors, getString(R.string.invalid_email))) {
+            return;
+        }
         if (!inputValidation.isInputEditTextFilled(editTextPassword, passwordErrors, getString(R.string.pwd_empty))) {
             return;
         }
@@ -139,7 +142,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
             Toast.makeText( getBaseContext(), "Please select a user type!",Toast.LENGTH_LONG).show();
             return;
         }
-//
+
 //        if (!inputValidation.isInputEditTextMatches(textInputEditTextPassword, textInputEditTextConfirmPassword,
 //                textInputLayoutConfirmPassword, getString(R.string.error_password_match))) {
 //            return;

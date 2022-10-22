@@ -14,6 +14,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="email_empty">Email cannot be empty</string>
+    <string name="invalid_email">Please enter a valid email address</string>
     <string name="pwd_empty">Password cannot be empty</string>
     <string name="conf_pwd_empty">Confirm password cannot be empty</string>
 
