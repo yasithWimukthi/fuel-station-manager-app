@@ -9,7 +9,7 @@ import com.fuelstationmanagerapp.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper {
+public class DatabaseHelper extends SQLiteOpenHelper{
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -27,4 +27,24 @@ public class DatabaseHelper {
             + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
+
+    /**
+     * Constructor
+     *
+     * @param context
+     */
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_USER_TABLE);
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //Drop User Table if exist
+        db.execSQL(DROP_USER_TABLE);
+        // Create tables again
+        onCreate(db);
+    }
 }
