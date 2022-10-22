@@ -69,4 +69,13 @@ public class RegisterScreen extends AppCompatActivity {
         buttonRegister.setOnClickListener((View.OnClickListener) this);
 //        appCompatTextViewLoginLink.setOnClickListener(this);
     }
+
+    /**
+     * This method is to initialize objects to be used
+     */
+    private void initObjects() {
+        inputValidation = new InputValidation(activity);
+        databaseHelper = new DatabaseHelper(activity);
+        user = new User();
+    }
 }
