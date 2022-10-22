@@ -35,6 +35,7 @@ public class InputValidation {
         if (value.isEmpty()) {
             textView.setText(message);
             textView.setVisibility(View.VISIBLE);
+            hideKeyboardFrom(textView);
             return false;
         } else {
             textView.setVisibility(View.GONE);
@@ -55,10 +56,34 @@ public class InputValidation {
         if (value.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
             textView.setText(message);
             textView.setVisibility(View.VISIBLE);
+            hideKeyboardFrom(textView);
             return false;
         } else {
             textView.setVisibility(View.GONE);
         }
         return true;
+    }
+
+    public boolean isInputEditTextMatches(EditText editText1, EditText editText2, TextView textView, String message) {
+        String value1 = editText1.getText().toString().trim();
+        String value2 = editText2.getText().toString().trim();
+        if (!value1.contentEquals(value2)) {
+            textView.setText(message);
+            textView.setVisibility(View.VISIBLE);
+            hideKeyboardFrom(textView);
+            return false;
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+        return true;
+    }
+    /**
+     * method to Hide keyboard
+     *
+     * @param view
+     */
+    private void hideKeyboardFrom(View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 }

@@ -137,16 +137,18 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         if (!inputValidation.isInputEditTextFilled(editTextConfirmPassword, confPasswordErrors, getString(R.string.conf_pwd_empty))) {
             return;
         }
+
+        if (!inputValidation.isInputEditTextMatches(editTextPassword, editTextConfirmPassword,
+                confPasswordErrors, getString(R.string.error_password_match))) {
+            return;
+        }
+
         if (rg.getCheckedRadioButtonId() == -1)
         {
             Toast.makeText( getBaseContext(), "Please select a user type!",Toast.LENGTH_LONG).show();
             return;
         }
 
-//        if (!inputValidation.isInputEditTextMatches(textInputEditTextPassword, textInputEditTextConfirmPassword,
-//                textInputLayoutConfirmPassword, getString(R.string.error_password_match))) {
-//            return;
-//        }
         if (!databaseHelper.checkUser(editTextEmail.getText().toString().trim())) {
             user.setEmail(editTextEmail.getText().toString().trim());
             user.setPassword(editTextPassword.getText().toString().trim());
@@ -159,6 +161,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         } else {
             // Snack Bar to show error message that record already exists
 //            Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
+            Toast.makeText( getBaseContext(), "User registration error!",Toast.LENGTH_LONG).show();
         }
     }
         /**
