@@ -57,4 +57,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         buttonRegister = (Button) findViewById(R.id.btnRegister);
 //      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
     }
+
+    /**
+     * This method is to initialize listeners
+     */
+    private void initListeners() {
+        buttonRegister.setOnClickListener(this);
+//      appCompatTextViewLoginLink.setOnClickListener(this);
+    }
 }
