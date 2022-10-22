@@ -29,9 +29,13 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private String queueTypes[] = {"Motorcycle","Car","Three Wheeler"};
+    private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
+    private AutoCompleteTextView fuelStationAutoCompleteTextView;
     private ArrayAdapter<String> queueTypeAdapter;
+    private ArrayAdapter<String> fuelStationAdapter;
     private String queueType;
+    private String fuelStation;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -81,6 +85,14 @@ public class HomeFragment extends Fragment {
 
         queueTypeAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             queueType = parent.getItemAtPosition(position).toString();
+        });
+
+        fuelStationAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.fuelStationTypeInput);
+        fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStations);
+        fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
+
+        fuelStationAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            fuelStation = parent.getItemAtPosition(position).toString();
         });
     }
 }
