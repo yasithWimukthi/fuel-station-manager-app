@@ -2,11 +2,15 @@ package com.fuelstationmanagerapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,11 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String queueTypes[] = {"Motorcycle","Car","Three Wheeler"};
+    private AutoCompleteTextView queueTypeAutoCompleteTextView;
+    private ArrayAdapter<String> queueTypeAdapter;
+    private String queueType;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,6 +62,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -60,5 +70,17 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        queueTypeAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.queueTypeInput);
+        queueTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, queueTypes);
+        queueTypeAutoCompleteTextView.setAdapter(queueTypeAdapter);
+
+        queueTypeAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            queueType = parent.getItemAtPosition(position).toString();
+        });
     }
 }
