@@ -26,15 +26,15 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private EditText editTextEmail;
     private EditText editTextPassword;
 
-    private Button btnLogin;
+    private Button buttonLogin;
     private AppCompatTextView appCompatTextViewLoginLink;
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_screen);
+        setContentView(R.layout.activity_login_screen);
         getSupportActionBar().hide();
 
         initViews();
@@ -55,7 +55,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editTextEmail = (EditText) findViewById(R.id.inputEmail);
         editTextPassword = (EditText) findViewById(R.id.inputPassword);
 
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        buttonLogin = (Button) findViewById(R.id.btnLogin);
 //      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
     }
 
@@ -63,7 +63,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
      * This method is to initialize listeners
      */
     private void initListeners() {
-        btnLogin.setOnClickListener(this);
+        buttonLogin.setOnClickListener(this);
 //      appCompatTextViewLoginLink.setOnClickListener(this);
     }
 
