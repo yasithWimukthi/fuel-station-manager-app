@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
                 createItemFor(POS_CLOSE),
                 createItemFor(POS_DASHBOARD),
+                createItemFor(POS_ADD_FUEL_STATION),
                 new SpaceItem(150),
                 createItemFor(POS_LOGOUT)
         ));
