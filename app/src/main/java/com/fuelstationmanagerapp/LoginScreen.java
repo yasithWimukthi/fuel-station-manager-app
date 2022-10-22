@@ -117,4 +117,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 //            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
         }
     }
+
+    /**
+     * This method is to empty all input edit text
+     */
+    private void emptyInputEditText() {
+        editTextEmail.setText(null);
+        editTextPassword.setText(null);
+    }
 }
