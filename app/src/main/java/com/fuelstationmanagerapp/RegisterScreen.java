@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.widget.NestedScrollView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -59,5 +60,13 @@ public class RegisterScreen extends AppCompatActivity {
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
 //        appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
+    }
+
+    /**
+     * This method is to initialize listeners
+     */
+    private void initListeners() {
+        buttonRegister.setOnClickListener((View.OnClickListener) this);
+//        appCompatTextViewLoginLink.setOnClickListener(this);
     }
 }
