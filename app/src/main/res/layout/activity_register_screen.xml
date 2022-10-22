@@ -72,12 +72,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
+        <TextView
+            android:id="@+id/emailErrors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/inputEmail"
+            app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+
         <EditText
             android:id="@+id/inputPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_border"
             android:drawableStart="@drawable/ic_lock"
@@ -87,15 +97,26 @@
             android:inputType="textPassword"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+
+        <TextView
+            android:id="@+id/passwordErrors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/inputPassword"
+            app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
         <EditText
             android:id="@+id/confirmPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/round_border"
             android:drawableStart="@drawable/ic_lock"
@@ -105,42 +126,54 @@
             android:inputType="textPassword"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+
+        <TextView
+            android:id="@+id/confPasswordErrors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="@+id/confirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="32dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmPassword">
+            app:layout_constraintTop_toBottomOf="@+id/inputPassword">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:padding="16dp"
-                android:button="@android:color/transparent"
                 android:background="@drawable/radio_selector"
-                android:textColor="@drawable/radio_text"
+                android:button="@android:color/transparent"
                 android:elevation="4dp"
-                android:text="Customer" />
+                android:padding="16dp"
+                android:text="Customer"
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:padding="16dp"
-                android:button="@android:color/transparent"
                 android:background="@drawable/radio_selector"
-                android:textColor="@drawable/radio_text"
+                android:button="@android:color/transparent"
                 android:elevation="4dp"
-                android:text="Owner" />
+                android:padding="16dp"
+                android:text="Owner"
+                android:textColor="@drawable/radio_text" />
 
         </RadioGroup>
 
@@ -204,7 +237,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:text="@string/already_have_login"
             android:textColor="@color/colorPrimary"
@@ -213,8 +246,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
