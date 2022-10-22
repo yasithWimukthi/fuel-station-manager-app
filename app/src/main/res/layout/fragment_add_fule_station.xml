@@ -122,6 +122,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputLocation" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/fuelTypes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectFuelTypes"
+            >
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:text="Petrol"
+                />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:text="Diesel "
+                />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:text="Gasoline"
+                />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="0dp"
@@ -136,7 +173,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectFuelTypes" />
+            app:layout_constraintTop_toBottomOf="@+id/fuelTypes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
