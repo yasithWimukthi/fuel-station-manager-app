@@ -138,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="5dp"
+                android:theme="@style/CheckboxTheme"
                 android:text="Petrol"
                 />
 
@@ -146,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="5dp"
+                android:theme="@style/CheckboxTheme"
                 android:text="Diesel "
                 />
 
@@ -154,6 +156,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:padding="5dp"
+                android:theme="@style/CheckboxTheme"
+
                 android:text="Gasoline"
                 />
 
