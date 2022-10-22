@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
@@ -23,15 +25,18 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
 
     private final AppCompatActivity activity = RegisterScreen.this;
 
-    private NestedScrollView nestedScrollView;
+//    private NestedScrollView nestedScrollView;
 
-    private TextInputLayout textInputLayoutEmail;
-    private TextInputLayout textInputLayoutPassword;
-    private TextInputLayout textInputLayoutConfirmPassword;
+//    private TextInputLayout textInputLayoutEmail;
+//    private TextInputLayout textInputLayoutPassword;
+//    private TextInputLayout textInputLayoutConfirmPassword;
 
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
+
+    private RadioGroup rg;
+
 
     private Button buttonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
@@ -59,6 +64,8 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         editTextEmail = (EditText) findViewById(R.id.inputEmail);
         editTextPassword = (EditText) findViewById(R.id.inputPassword);
         editTextConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
+
+        rg = (RadioGroup) findViewById(R.id.radioGroup);
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
 //        appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
@@ -122,6 +129,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         if (!databaseHelper.checkUser(editTextEmail.getText().toString().trim())) {
             user.setEmail(editTextEmail.getText().toString().trim());
             user.setPassword(editTextPassword.getText().toString().trim());
+            user.setRole(((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString());
             databaseHelper.addUser(user);
             // Snack Bar to show success message that record saved successfully
 //            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
