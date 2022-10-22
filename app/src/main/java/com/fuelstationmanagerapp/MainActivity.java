@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
 
     private static final int POS_CLOSE = 0;
     private static final int POS_DASHBOARD = 1;
-    private static final int POS_LOGOUT = 2;
+    private static final int POS_ADD_FUEL_STATION = 2;
+    private static final int POS_LOGOUT = 3;
     private static final String TAG = "Main Activity";
 
     private String[] screenTitles;
@@ -126,10 +127,14 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
     public void onItemSelected(int position) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (position == POS_DASHBOARD){
+        if (position == POS_DASHBOARD) {
             toolbar.setTitle("Dashboard");
             HomeFragment homeFragment = new HomeFragment();
             transaction.replace(R.id.container, homeFragment);
+        }else if (position == POS_ADD_FUEL_STATION)  {
+            toolbar.setTitle("Add Fuel Station");
+            AddFuleStationFragment fuelStationFragment = new AddFuleStationFragment();
+            transaction.replace(R.id.container, fuelStationFragment);
         }else{
             finish();
         }
