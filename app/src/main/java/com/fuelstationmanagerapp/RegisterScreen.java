@@ -20,18 +20,10 @@ import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
 import com.fuelstationmanagerapp.sql.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterScreen extends AppCompatActivity implements View.OnClickListener{
 
     private final AppCompatActivity activity = RegisterScreen.this;
-
-//    private NestedScrollView nestedScrollView;
-
-//    private TextInputLayout textInputLayoutEmail;
-//    private TextInputLayout textInputLayoutPassword;
-//    private TextInputLayout textInputLayoutConfirmPassword;
 
     private TextView emailErrors;
     private TextView passwordErrors;
@@ -42,7 +34,6 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     private EditText editTextConfirmPassword;
 
     private RadioGroup rg;
-
 
     private Button buttonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
@@ -65,8 +56,6 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      * This method is to initialize views
      */
     private void initViews() {
-//        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
-
         emailErrors = (TextView) findViewById(R.id.emailErrors);
         passwordErrors = (TextView) findViewById(R.id.passwordErrors);
         confPasswordErrors = (TextView) findViewById(R.id.confPasswordErrors);
@@ -83,7 +72,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         rg = (RadioGroup) findViewById(R.id.radioGroup);
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
-//        appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
+//      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
     }
 
     /**
@@ -91,7 +80,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      */
     private void initListeners() {
         buttonRegister.setOnClickListener(this);
-//        appCompatTextViewLoginLink.setOnClickListener(this);
+//      appCompatTextViewLoginLink.setOnClickListener(this);
     }
 
     /**
@@ -128,22 +117,27 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         if (!inputValidation.isInputEditTextFilled(editTextEmail, emailErrors, getString(R.string.email_empty))) {
             return;
         }
+        if (!inputValidation.isInputEditTextEmail(editTextEmail, emailErrors, getString(R.string.invalid_email))) {
+            return;
+        }
         if (!inputValidation.isInputEditTextFilled(editTextPassword, passwordErrors, getString(R.string.pwd_empty))) {
             return;
         }
         if (!inputValidation.isInputEditTextFilled(editTextConfirmPassword, confPasswordErrors, getString(R.string.conf_pwd_empty))) {
             return;
         }
+
+        if (!inputValidation.isInputEditTextMatches(editTextPassword, editTextConfirmPassword,
+                confPasswordErrors, getString(R.string.error_password_match))) {
+            return;
+        }
+
         if (rg.getCheckedRadioButtonId() == -1)
         {
             Toast.makeText( getBaseContext(), "Please select a user type!",Toast.LENGTH_LONG).show();
             return;
         }
-//
-//        if (!inputValidation.isInputEditTextMatches(textInputEditTextPassword, textInputEditTextConfirmPassword,
-//                textInputLayoutConfirmPassword, getString(R.string.error_password_match))) {
-//            return;
-//        }
+
         if (!databaseHelper.checkUser(editTextEmail.getText().toString().trim())) {
             user.setEmail(editTextEmail.getText().toString().trim());
             user.setPassword(editTextPassword.getText().toString().trim());
@@ -156,6 +150,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         } else {
             // Snack Bar to show error message that record already exists
 //            Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
+            Toast.makeText( getBaseContext(), "User registration error!",Toast.LENGTH_LONG).show();
         }
     }
         /**

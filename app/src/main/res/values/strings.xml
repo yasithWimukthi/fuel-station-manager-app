@@ -13,9 +13,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="email_empty">Email cannot be empty</string>
-    <string name="pwd_empty">Password cannot be empty</string>
-    <string name="conf_pwd_empty">Confirm password cannot be empty</string>
+    <string name="email_empty">email cannot be empty!</string>
+    <string name="invalid_email">please enter a valid email address!</string>
+    <string name="pwd_empty">password cannot be empty!</string>
+    <string name="conf_pwd_empty">confirm password cannot be empty!</string>
+    <string name="error_password_match">passwords do not match!</string>
 
 
 </resources>
