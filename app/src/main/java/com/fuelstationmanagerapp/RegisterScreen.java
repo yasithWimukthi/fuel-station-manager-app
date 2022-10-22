@@ -17,7 +17,7 @@ import com.fuelstationmanagerapp.sql.DatabaseHelper;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class RegisterScreen extends AppCompatActivity {
+public class RegisterScreen extends AppCompatActivity implements View.OnClickListener{
 
     private final AppCompatActivity activity = RegisterScreen.this;
 
@@ -66,7 +66,7 @@ public class RegisterScreen extends AppCompatActivity {
      * This method is to initialize listeners
      */
     private void initListeners() {
-        buttonRegister.setOnClickListener((View.OnClickListener) this);
+        buttonRegister.setOnClickListener(this);
 //        appCompatTextViewLoginLink.setOnClickListener(this);
     }
 
@@ -78,4 +78,23 @@ public class RegisterScreen extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(activity);
         user = new User();
     }
+
+    /**
+     * This implemented method is to listen the click on view
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnRegister:
+//                postDataToSQLite();
+                break;
+//            case R.id.appCompatTextViewLoginLink:
+//                finish();
+//                break;
+        }
+    }
+
+
 }
