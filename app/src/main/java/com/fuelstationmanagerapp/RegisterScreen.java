@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.widget.NestedScrollView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,7 +90,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRegister:
-//                postDataToSQLite();
+                postDataToSQLite();
                 break;
 //            case R.id.appCompatTextViewLoginLink:
 //                finish();
@@ -101,6 +102,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      * This method is to validate the input text fields and post data to SQLite
      */
     private void postDataToSQLite() {
+        Log.i("hey", "hey");
 //        if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
 //            return;
 //        }
