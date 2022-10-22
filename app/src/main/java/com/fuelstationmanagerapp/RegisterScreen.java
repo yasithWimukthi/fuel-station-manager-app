@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
 import com.fuelstationmanagerapp.sql.DatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -27,9 +28,9 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     private TextInputLayout textInputLayoutPassword;
     private TextInputLayout textInputLayoutConfirmPassword;
 
-    private EditText textInputEditTextEmail;
-    private EditText textInputEditTextPassword;
-    private EditText textInputEditTextConfirmPassword;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private EditText editTextConfirmPassword;
 
     private Button buttonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
@@ -54,9 +55,9 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     private void initViews() {
 //        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
-        textInputEditTextEmail = (EditText) findViewById(R.id.inputEmail);
-        textInputEditTextPassword = (EditText) findViewById(R.id.inputPassword);
-        textInputEditTextConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
+        editTextEmail = (EditText) findViewById(R.id.inputEmail);
+        editTextPassword = (EditText) findViewById(R.id.inputPassword);
+        editTextConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
 //        appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
@@ -96,5 +97,46 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * This method is to validate the input text fields and post data to SQLite
+     */
+    private void postDataToSQLite() {
+//        if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
+//            return;
+//        }
+//        if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+//            return;
+//        }
+//        if (!inputValidation.isInputEditTextEmail(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
+//            return;
+//        }
+//        if (!inputValidation.isInputEditTextFilled(textInputEditTextPassword, textInputLayoutPassword, getString(R.string.error_message_password))) {
+//            return;
+//        }
+//        if (!inputValidation.isInputEditTextMatches(textInputEditTextPassword, textInputEditTextConfirmPassword,
+//                textInputLayoutConfirmPassword, getString(R.string.error_password_match))) {
+//            return;
+//        }
+        if (!databaseHelper.checkUser(editTextEmail.getText().toString().trim())) {
+            user.setEmail(editTextEmail.getText().toString().trim());
+            user.setPassword(editTextPassword.getText().toString().trim());
+            databaseHelper.addUser(user);
+            // Snack Bar to show success message that record saved successfully
+//            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
+            emptyInputEditText();
+        } else {
+            // Snack Bar to show error message that record already exists
+//            Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
+        }
+    }
+        /**
+         * This method is to empty all input edit text
+         */
+        private void emptyInputEditText() {
+            editTextEmail.setText(null);
+            editTextPassword.setText(null);
+            editTextConfirmPassword.setText(null);
+        }
+    }
 
-}
+
