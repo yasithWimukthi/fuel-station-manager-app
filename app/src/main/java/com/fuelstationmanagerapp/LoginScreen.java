@@ -24,11 +24,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private EditText editTextEmail;
     private EditText editTextPassword;
 
-    private Button buttonRegister;
+    private Button btnLogin;
     private AppCompatTextView appCompatTextViewLoginLink;
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editTextEmail = (EditText) findViewById(R.id.inputEmail);
         editTextPassword = (EditText) findViewById(R.id.inputPassword);
 
-        buttonRegister = (Button) findViewById(R.id.btnRegister);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
 //      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
     }
 
@@ -62,7 +61,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
      * This method is to initialize listeners
      */
     private void initListeners() {
-        buttonRegister.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
 //      appCompatTextViewLoginLink.setOnClickListener(this);
     }
 
@@ -74,4 +73,22 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         inputValidation = new InputValidation(activity);
     }
 
+    /**
+     * This implemented method is to listen the click on view
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnLogin:
+                verifyFromSQLite();
+                break;
+//            case R.id.textViewLinkRegister:
+//                // Navigate to RegisterActivity
+//                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
+//                startActivity(intentRegister);
+//                break;
+        }
+    }
 }
