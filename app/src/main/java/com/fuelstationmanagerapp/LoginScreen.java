@@ -3,6 +3,7 @@ package com.fuelstationmanagerapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -89,6 +90,31 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 //                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
 //                startActivity(intentRegister);
 //                break;
+        }
+    }
+
+    /**
+     * This method is to validate the input text fields and verify login credentials from SQLite
+     */
+    private void verifyFromSQLite() {
+        if (!inputValidation.isInputEditTextFilled(editTextEmail, emailErrors, getString(R.string.email_empty))) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextEmail(editTextEmail, emailErrors, getString(R.string.invalid_email))) {
+            return;
+        }
+        if (!inputValidation.isInputEditTextFilled(editTextPassword, passwordErrors, getString(R.string.pwd_empty))) {
+            return;
+        }
+        if (databaseHelper.checkUser(editTextEmail.getText().toString().trim()
+                , editTextPassword.getText().toString().trim())) {
+//            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
+//            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            emptyInputEditText();
+//            startActivity(accountsIntent);
+        } else {
+            // Snack Bar to show success message that record is wrong
+//            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
         }
     }
 }
