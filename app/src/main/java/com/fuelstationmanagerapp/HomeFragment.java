@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.fuelstationmanagerapp.model.QueueItem;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
@@ -111,6 +113,15 @@ public class HomeFragment extends Fragment {
         queueRecyclerView.setHasFixedSize(true);
         queueRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        QueueItem[] queueItems = new QueueItem[]{
+                new QueueItem("name1","status1","time1"),
+                new QueueItem("name2","status2","time2"),
+                new QueueItem("name3","status3","time3"),
+                new QueueItem("name4","status4","time4")
+        };
+
+        QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
+        queueRecyclerView.setAdapter(queueAdapter);
 
     }
 }
