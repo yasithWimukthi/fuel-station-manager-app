@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
     private static final int POS_CLOSE = 0;
     private static final int POS_DASHBOARD = 1;
     private static final int POS_ADD_FUEL_STATION = 2;
-    private static final int POS_LOGOUT = 3;
+    private static final int POS_FUEL_STATIONS = 3;
+    private static final int POS_LOGOUT = 4;
     private static final String TAG = "Main Activity";
 
     private String[] screenTitles;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
                 createItemFor(POS_CLOSE),
                 createItemFor(POS_DASHBOARD),
                 createItemFor(POS_ADD_FUEL_STATION),
+                createItemFor(POS_FUEL_STATIONS),
                 new SpaceItem(150),
                 createItemFor(POS_LOGOUT)
         ));
@@ -132,10 +134,14 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
             toolbar.setTitle("Dashboard");
             HomeFragment homeFragment = new HomeFragment();
             transaction.replace(R.id.container, homeFragment);
-        }else if (position == POS_ADD_FUEL_STATION)  {
+        }else if (position == POS_ADD_FUEL_STATION) {
             toolbar.setTitle("Add Fuel Station");
             AddFuleStationFragment fuelStationFragment = new AddFuleStationFragment();
             transaction.replace(R.id.container, fuelStationFragment);
+        }else if (position == POS_FUEL_STATIONS) {
+            toolbar.setTitle("Fuel Stations");
+            FuelStationsFragment fuelStationsFragment = new FuelStationsFragment();
+            transaction.replace(R.id.container, fuelStationsFragment);
         }else{
             finish();
         }
