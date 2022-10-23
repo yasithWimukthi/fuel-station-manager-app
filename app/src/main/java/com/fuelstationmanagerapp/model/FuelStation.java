@@ -4,32 +4,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class FuelStation {
 
-    @SerializedName("name")
-    private String superName;
-
-    @SerializedName("owner")
-    private String superOwner;
-
-    @SerializedName("location")
-    private String superLocation;
+    private String name;
+    private String owner;
+    private String location;
 
 
     public FuelStation(String name, String owner, String location) {
-        this.superName = name;
-        this.superOwner = owner;
-        this.superLocation = location;
+        this.name = name;
+        this.owner = owner;
+        this.location = location;
 
     }
 
     public String getName() {
-        return superName;
+        return name;
     }
 
     public String getOwner() {
-        return superOwner;
+        return owner;
     }
 
     public String getLocation() {
-        return superLocation;
+        return location;
     }
 }
