@@ -27,10 +27,10 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private EditText editTextPassword;
 
     private Button buttonLogin;
-    private AppCompatTextView appCompatTextViewLoginLink;
+    private TextView goToRegister;
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
-//
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editTextPassword = (EditText) findViewById(R.id.inputPassword);
 
         buttonLogin = (Button) findViewById(R.id.btnLogin);
-//      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
+        goToRegister = (TextView) findViewById(R.id.gotoRegister);
     }
 
     /**
@@ -64,7 +64,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
      */
     private void initListeners() {
         buttonLogin.setOnClickListener(this);
-//      appCompatTextViewLoginLink.setOnClickListener(this);
+        goToRegister.setOnClickListener(this);
     }
 
     /**
@@ -86,11 +86,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             case R.id.btnLogin:
                 verifyFromSQLite();
                 break;
-//            case R.id.textViewLinkRegister:
-//                // Navigate to RegisterActivity
-//                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
-//                startActivity(intentRegister);
-//                break;
+            case R.id.gotoRegister:
+                // Navigate to RegisterActivity
+                Intent intentRegister = new Intent(getApplicationContext(), RegisterScreen.class);
+                startActivity(intentRegister);
+                break;
         }
     }
 
