@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,12 +33,23 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final FuelStation fuelStation = fuelStations[position];
+        holder.textViewName.setText(fuelStation.getName());
+        holder.textViewPetrolStatus.setText(fuelStation.isPetrolStatus() ? "Available" : "Not Available");
+        holder.textViewDieselStatus.setText(fuelStation.isDieselStatus() ? "Available" : "Not Available");
+        holder.textViewGasolineStatus.setText(fuelStation.isGasolineStatus() ? "Available" : "Not Available");
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, fuelStation.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return fuelStations.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

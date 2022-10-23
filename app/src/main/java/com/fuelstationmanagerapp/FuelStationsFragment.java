@@ -2,11 +2,17 @@ package com.fuelstationmanagerapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.fuelstationmanagerapp.model.FuelStation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,9 @@ public class FuelStationsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView fuelStationsRecyclerView;
+
 
     public FuelStationsFragment() {
         // Required empty public constructor
@@ -60,5 +69,28 @@ public class FuelStationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fuel_stations, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        fuelStationsRecyclerView = v.findViewById(R.id.fuelStationsRecyclerView);
+
+        /**
+         * setting fuel stations recycler view
+         */
+
+        fuelStationsRecyclerView.setHasFixedSize(true);
+        fuelStationsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        FuelStation[] fuelStations = new FuelStation[]{
+                new FuelStation("station 1", true, false, false),
+                new FuelStation("station 2", false, true, false),
+                new FuelStation("station 3", false, false, true),
+                new FuelStation("station 4", true, false, false),
+        };
+
+        FuelStationAdapter fuelStationsAdapter = new FuelStationAdapter(getContext(),fuelStations);
+        fuelStationsRecyclerView.setAdapter(fuelStationsAdapter);
     }
 }
