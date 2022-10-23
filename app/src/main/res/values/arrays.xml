@@ -4,6 +4,7 @@
         <item></item>
         <item>Home</item>
         <item>Add Fuel Station</item>
+        <item>Fuel Stations</item>
         <item>Logout</item>
     </string-array>
 
@@ -11,6 +12,7 @@
         <item>0</item>
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_baseline_add_circle_24</item>
+        <item>@drawable/ic_baseline_ev_station_24</item>
         <item>@drawable/ic_logout</item>
     </array>
 </resources>
