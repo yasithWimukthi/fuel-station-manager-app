@@ -36,7 +36,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
     private RadioGroup rg;
 
     private Button buttonRegister;
-    private AppCompatTextView appCompatTextViewLoginLink;
+    private TextView goToLogin;
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
     private User user;
@@ -72,7 +72,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         rg = (RadioGroup) findViewById(R.id.radioGroup);
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
-//      appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
+        goToLogin = (TextView) findViewById(R.id.gotoLogin);
     }
 
     /**
@@ -80,7 +80,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      */
     private void initListeners() {
         buttonRegister.setOnClickListener(this);
-//      appCompatTextViewLoginLink.setOnClickListener(this);
+        goToLogin.setOnClickListener(this);
     }
 
     /**
@@ -103,9 +103,9 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
             case R.id.btnRegister:
                 postDataToSQLite();
                 break;
-//            case R.id.appCompatTextViewLoginLink:
-//                finish();
-//                break;
+            case R.id.gotoLogin:
+                finish();
+                break;
         }
     }
 

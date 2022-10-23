@@ -198,54 +198,54 @@
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="10dp"
             android:text="@string/or"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/linearLayout2"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textView7">-->
 
-            <ImageView
-                android:id="@+id/googleLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/google_icon"
-                app:srcCompat="@drawable/google" />
+<!--            <ImageView-->
+<!--                android:id="@+id/googleLogin"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/google_icon"-->
+<!--                app:srcCompat="@drawable/google" />-->
 
-            <ImageView
-                android:id="@+id/facebookLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/facebook_icon"
-                app:srcCompat="@drawable/facebook" />
-        </LinearLayout>
+<!--            <ImageView-->
+<!--                android:id="@+id/facebookLogin"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:contentDescription="@string/facebook_icon"-->
+<!--                app:srcCompat="@drawable/facebook" />-->
+<!--        </LinearLayout>-->
 
         <TextView
-            android:id="@+id/gotoRegister"
+            android:id="@+id/gotoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginStart="117dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="117dp"
             android:text="@string/already_have_login"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
