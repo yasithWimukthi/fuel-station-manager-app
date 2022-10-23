@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,7 @@ public class HomeFragment extends Fragment {
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
     private AutoCompleteTextView fuelStationAutoCompleteTextView;
+    private RecyclerView queueRecyclerView;
     private ArrayAdapter<String> queueTypeAdapter;
     private ArrayAdapter<String> fuelStationAdapter;
     private String queueType;
@@ -79,10 +82,14 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        queueRecyclerView = v.findViewById(R.id.queueRecyclerView);
         queueTypeAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.queueTypeInput);
         queueTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, queueTypes);
         queueTypeAutoCompleteTextView.setAdapter(queueTypeAdapter);
 
+        /**
+         * This is the listener for the queue type auto complete text view
+         */
         queueTypeAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             queueType = parent.getItemAtPosition(position).toString();
         });
@@ -91,8 +98,19 @@ public class HomeFragment extends Fragment {
         fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStations);
         fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
 
+        /**
+         * This is the listener for the fuel station auto complete text view
+         */
         fuelStationAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             fuelStation = parent.getItemAtPosition(position).toString();
         });
+
+        /**
+         * setting queue recycler view
+         */
+        queueRecyclerView.setHasFixedSize(true);
+        queueRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
     }
 }
