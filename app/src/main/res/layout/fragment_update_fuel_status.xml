@@ -250,7 +250,165 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/dieselArrivalTimeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Diesel Arrival Time"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/selectDieselStatus"/>
 
+        <EditText
+            android:id="@+id/inputDieselArrivalTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_border"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_baseline_access_time_filled_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Diesel Arrival Time"
+            android:inputType="datetime"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dieselArrivalTimeTextView" />
+
+        <TextView
+            android:id="@+id/dieselFinishTimeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Diesel Finished Time"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/inputDieselArrivalTime"/>
+
+        <EditText
+            android:id="@+id/inputDieselFinishedTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_border"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_baseline_access_time_filled_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Diesel Finished Time"
+            android:inputType="datetime"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dieselFinishTimeTextView" />
+
+        <TextView
+            android:id="@+id/gasolineStatusTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Gasoline Status"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/inputDieselFinishedTime"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/selectGasolineStatus"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="Select Gasoline Status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gasolineStatusTextView">
+
+            <AutoCompleteTextView
+                android:id="@+id/gasolineStatusInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:padding="16dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/gasolineArrivalTimeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Gasoline Arrival Time"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/selectGasolineStatus"/>
+
+        <EditText
+            android:id="@+id/inputGasolineArrivalTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_border"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_baseline_access_time_filled_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Gasoline Arrival Time"
+            android:inputType="datetime"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gasolineArrivalTimeTextView" />
+
+        <TextView
+            android:id="@+id/gasolineFinishTimeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Gasoline Finished Time"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/inputGasolineArrivalTime"/>
+
+        <EditText
+            android:id="@+id/inputGasolineFinishedTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_border"
+            android:layout_marginEnd="32dp"
+            android:drawableStart="@drawable/ic_baseline_access_time_filled_24"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Gasoline Finished Time"
+            android:inputType="datetime"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gasolineFinishTimeTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
