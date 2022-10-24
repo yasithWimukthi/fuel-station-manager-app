@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fuelstationmanagerapp.model.FuelStation;
@@ -42,7 +44,12 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, fuelStation.getName(), Toast.LENGTH_SHORT).show();
+                Toolbar toolbar = ((MainActivity)context).findViewById(R.id.toolbar);
+                toolbar.setTitle("Update Fuel Station");
+                FragmentTransaction transaction = ((MainActivity)context).getSupportFragmentManager().beginTransaction();
+                UpdateFuelStatusFragment updateFuelStatusFragment = new UpdateFuelStatusFragment();
+                transaction.replace(R.id.container, updateFuelStatusFragment);
+                transaction.commit();
             }
         });
     }

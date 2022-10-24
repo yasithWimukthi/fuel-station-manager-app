@@ -32,11 +32,14 @@ public class UpdateFuelStatusFragment extends Fragment {
 
     private AutoCompleteTextView petrolStatusAutoCompleteTextView;
     private AutoCompleteTextView dieselStatusAutoCompleteTextView;
+    private AutoCompleteTextView gasolineStatusAutoCompleteTextView;
     private ArrayAdapter<String> petrolStatusAdapter;
     private ArrayAdapter<String> dieselStatusAdapter;
+    private ArrayAdapter<String> gasolineStatusAdapter;
 
     private String petrolStatus;
     private String dieselStatus;
+    private String gasolineStatus;
 
 
     public UpdateFuelStatusFragment() {
@@ -87,6 +90,9 @@ public class UpdateFuelStatusFragment extends Fragment {
         dieselStatusAutoCompleteTextView = v.findViewById(R.id.dieselStatusInput);
         dieselStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
         dieselStatusAutoCompleteTextView.setAdapter(dieselStatusAdapter);
+        gasolineStatusAutoCompleteTextView = v.findViewById(R.id.gasolineStatusInput);
+        gasolineStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
+        gasolineStatusAutoCompleteTextView.setAdapter(gasolineStatusAdapter);
 
         /**
          *  This is the listener for the petrol status auto complete text view
@@ -102,6 +108,13 @@ public class UpdateFuelStatusFragment extends Fragment {
         dieselStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             dieselStatus = parent.getItemAtPosition(position).toString();
         });
+
+        /**
+         * This is the listener for the gasoline status auto complete text view
+         */
+        gasolineStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            gasolineStatus = parent.getItemAtPosition(position).toString();
+    });
     }
 
 }
