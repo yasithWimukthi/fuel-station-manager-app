@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.retrofit.Api;
+import com.fuelstationmanagerapp.retrofit.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,12 +77,8 @@ public class AddFuleStationFragment extends Fragment {
 
     private void postData(String owner, String sName, String location) {
         System.out.println("came in to post Data");
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.110:4001/api/v1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        Api retrofitAPI = retrofit.create(Api.class);
+        Api retrofitAPI = RetrofitClient.getInstance().getMyApi();
         FuelStation modal = new FuelStation(owner, sName, location);
 
         // calling a method to create a post and passing our modal class.
