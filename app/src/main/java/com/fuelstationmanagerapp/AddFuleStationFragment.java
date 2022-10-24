@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.fuelstationmanagerapp.model.FuelStation;
+import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.retrofit.Api;
 
 import retrofit2.Call;

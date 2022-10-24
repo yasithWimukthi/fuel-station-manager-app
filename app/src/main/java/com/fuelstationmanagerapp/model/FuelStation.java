@@ -1,30 +1,47 @@
 package com.fuelstationmanagerapp.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class FuelStation {
-
     private String name;
-    private String owner;
-    private String location;
+    private boolean petrolStatus;
+    private boolean dieselStatus;
+    private boolean gasolineStatus;
 
-
-    public FuelStation(String name, String owner, String location) {
+    public FuelStation(String name, boolean petrolStatus, boolean dieselStatus, boolean gasolineStatus) {
         this.name = name;
-        this.owner = owner;
-        this.location = location;
-
+        this.petrolStatus = petrolStatus;
+        this.dieselStatus = dieselStatus;
+        this.gasolineStatus = gasolineStatus;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getOwner() {
-        return owner;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public boolean isPetrolStatus() {
+        return petrolStatus;
+    }
+
+    public void setPetrolStatus(boolean petrolStatus) {
+        this.petrolStatus = petrolStatus;
+    }
+
+    public boolean isDieselStatus() {
+        return dieselStatus;
+    }
+
+    public void setDieselStatus(boolean dieselStatus) {
+        this.dieselStatus = dieselStatus;
+    }
+
+    public boolean isGasolineStatus() {
+        return gasolineStatus;
+    }
+
+    public void setGasolineStatus(boolean gasolineStatus) {
+        this.gasolineStatus = gasolineStatus;
     }
 }

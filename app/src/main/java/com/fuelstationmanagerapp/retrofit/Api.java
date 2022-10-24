@@ -1,6 +1,6 @@
 package com.fuelstationmanagerapp.retrofit;
 
-import com.fuelstationmanagerapp.model.FuelStation;
+import com.fuelstationmanagerapp.dbModel.FuelStation;
 
 import java.util.List;
 
