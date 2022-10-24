@@ -31,7 +31,12 @@ public class UpdateFuelStatusFragment extends Fragment {
     private String status[] = {"Available","Not Available"};
 
     private AutoCompleteTextView petrolStatusAutoCompleteTextView;
+    private AutoCompleteTextView dieselStatusAutoCompleteTextView;
     private ArrayAdapter<String> petrolStatusAdapter;
+    private ArrayAdapter<String> dieselStatusAdapter;
+
+    private String petrolStatus;
+    private String dieselStatus;
 
 
     public UpdateFuelStatusFragment() {
@@ -79,5 +84,24 @@ public class UpdateFuelStatusFragment extends Fragment {
         petrolStatusAutoCompleteTextView = v.findViewById(R.id.petrolStatusInput);
         petrolStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
         petrolStatusAutoCompleteTextView.setAdapter(petrolStatusAdapter);
+        dieselStatusAutoCompleteTextView = v.findViewById(R.id.dieselStatusInput);
+        dieselStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
+        dieselStatusAutoCompleteTextView.setAdapter(dieselStatusAdapter);
+
+        /**
+         *  This is the listener for the petrol status auto complete text view
+         */
+
+        petrolStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            petrolStatus = parent.getItemAtPosition(position).toString();
+            });
+
+        /**
+         * This is the listener for the diesel status auto complete text view
+         */
+        dieselStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            dieselStatus = parent.getItemAtPosition(position).toString();
+        });
     }
+
 }
