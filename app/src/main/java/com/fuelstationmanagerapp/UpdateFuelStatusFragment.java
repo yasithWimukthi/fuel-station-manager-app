@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,10 @@ public class UpdateFuelStatusFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String queueTypes[] = {"Available","Not Available"};
+
+    private AutoCompleteTextView petrolStatusAutoCompleteTextView;
 
     public UpdateFuelStatusFragment() {
         // Required empty public constructor
