@@ -14,7 +14,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.model.QueueItem;
+import com.fuelstationmanagerapp.retrofit.RetrofitClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +43,8 @@ public class HomeFragment extends Fragment {
 
     private String queueTypes[] = {"Motorcycle","Car","Three Wheeler"};
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
+    List<FuelStation> fuelStationList = new ArrayList<>();
+
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
     private AutoCompleteTextView fuelStationAutoCompleteTextView;
     private RecyclerView queueRecyclerView;
@@ -71,7 +82,6 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -97,9 +107,7 @@ public class HomeFragment extends Fragment {
         });
 
         fuelStationAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.fuelStationTypeInput);
-        fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStations);
-        fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
-
+        getFuelStations();
         /**
          * This is the listener for the fuel station auto complete text view
          */
@@ -123,5 +131,31 @@ public class HomeFragment extends Fragment {
         QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
         queueRecyclerView.setAdapter(queueAdapter);
 
+    }
+
+    //API
+    private void getFuelStations() {
+        Call<List<FuelStation>> call = RetrofitClient.getInstance().getMyApi().getFuelStations();
+        call.enqueue(new Callback<List<FuelStation>>() {
+            @Override
+            public void onResponse(Call<List<FuelStation>> call, Response<List<FuelStation>> response) {
+                fuelStationList = response.body();
+                String[] fuelStationsNameArray = new String[fuelStationList.size()];
+
+                for (int i = 0; i < fuelStationList.size(); i++) {
+                    fuelStationsNameArray[i] = fuelStationList.get(i).getName();
+                }
+                System.out.println("hi hashen.............."+fuelStationsNameArray[0]);
+                fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStationsNameArray);
+                fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<FuelStation>> call, Throwable t) {
+                System.out.println("error........."+t.getMessage());
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 }
