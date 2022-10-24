@@ -162,4 +162,12 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void navigateToUpdateFuelStation(){
+//        toolbar.setTitle("Update Fuel Station");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        UpdateFuelStatusFragment updateFuelStatusFragment = new UpdateFuelStatusFragment();
+        transaction.replace(R.id.container, updateFuelStatusFragment);
+        transaction.commit();
+    }
 }
