@@ -75,12 +75,6 @@ public class AddFuleStationFragment extends Fragment {
     }
 
     private void postData(String owner, String sName, String location) {
-
-        // below line is for displaying our progress bar.
-//        loadingPB.setVisibility(View.VISIBLE);
-
-        // on below line creating a retrofit
-        // builder and passing our base url
         System.out.println("came in to post Data");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.110:4001/api/v1/")
@@ -93,11 +87,9 @@ public class AddFuleStationFragment extends Fragment {
         // calling a method to create a post and passing our modal class.
         Call<FuelStation> call = retrofitAPI.createPost(modal);
 
-        // on below line we are executing our method.
         call.enqueue(new Callback<FuelStation>() {
             @Override
             public void onResponse(Call<FuelStation> call, Response<FuelStation> response) {
-                // this method is called when we get response from our api.
 //                Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 System.out.println("success");
 
@@ -108,7 +100,6 @@ public class AddFuleStationFragment extends Fragment {
                 FuelStation responseFromAPI = response.body();
 
 //                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
-
 //                responseTV.setText(responseString);
             }
 

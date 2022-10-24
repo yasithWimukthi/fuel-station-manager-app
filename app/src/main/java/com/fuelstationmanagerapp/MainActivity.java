@@ -36,10 +36,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity  implements DrawerAdapter.OnItemSelectedListener{
 
-    //add fuel station
-//    private EditText inputOwner, inputName, inputLocation;
-//    private Button btnAdd;
-
     private static final int POS_CLOSE = 0;
     private static final int POS_DASHBOARD = 1;
     private static final int POS_ADD_FUEL_STATION = 2;
@@ -59,8 +55,6 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         try{
@@ -68,12 +62,6 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
         }catch(IllegalStateException e){
             Log.e(TAG, "onCreate: "+ e.getMessage() );
         }
-
-//        //add fuel station
-//        inputOwner = findViewById(R.id.inputOwner);
-//        inputName = findViewById(R.id.inputName);
-//        inputLocation = findViewById(R.id.inputLocation);
-//        btnAdd = findViewById(R.id.btnAdd);
 
         slideRootNav = new SlidingRootNavBuilder(this)
                 .withDragDistance(180)
@@ -107,65 +95,7 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
 
         adapter.setSelected(POS_DASHBOARD);
 
-//        // adding on click listener to the button.
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // validating if the text field is empty or not.
-//                if (inputOwner.getText().toString().isEmpty() && inputName.getText().toString().isEmpty()  && inputLocation.getText().toString().isEmpty()) {
-//                    Toast.makeText(MainActivity.this, "Please enter all the values", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                // calling a method to post the data and passing variables.
-//                postData(inputOwner.getText().toString(), inputName.getText().toString(), inputLocation.getText().toString());
-//            }
-//        });
-
     }
-
-//    private void postData(String owner, String sName, String location) {
-//
-//        // below line is for displaying our progress bar.
-////        loadingPB.setVisibility(View.VISIBLE);
-//
-//        // on below line creating a retrofit
-//        // builder and passing our base url
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://localhost:4001/api/v1/fuelStations")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        Api retrofitAPI = retrofit.create(Api.class);
-//        FuelStation modal = new FuelStation(owner, sName, location);
-//
-//        // calling a method to create a post and passing our modal class.
-//        Call<FuelStation> call = retrofitAPI.createPost(modal);
-//
-//        // on below line we are executing our method.
-//        call.enqueue(new Callback<FuelStation>() {
-//            @Override
-//            public void onResponse(Call<FuelStation> call, Response<FuelStation> response) {
-//                // this method is called when we get response from our api.
-//                Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
-//
-//                inputOwner.setText("");
-//                inputName.setText("");
-//                inputLocation.setText("");
-//
-//                FuelStation responseFromAPI = response.body();
-//
-////                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
-//
-////                responseTV.setText(responseString);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<FuelStation> call, Throwable t) {
-//
-////                responseTV.setText("Error found is : " + t.getMessage());
-//            }
-//        });
-//    }
 
     private DrawerItem createItemFor(int position){
         return new SimpleItem(screenIcons[position],screenTitles[position])
