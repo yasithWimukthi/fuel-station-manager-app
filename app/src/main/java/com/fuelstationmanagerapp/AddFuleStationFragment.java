@@ -7,13 +7,31 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.fuelstationmanagerapp.dbModel.FuelStation;
+import com.fuelstationmanagerapp.retrofit.Api;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddFuleStationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+
 public class AddFuleStationFragment extends Fragment {
+
+    //add fuel station
+    private EditText inputOwner, inputName, inputLocation;
+    private Button btnAdd;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +71,69 @@ public class AddFuleStationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+    }
+
+    private void postData(String owner, String sName, String location) {
+        System.out.println("came in to post Data");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.110:4001/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api retrofitAPI = retrofit.create(Api.class);
+        FuelStation modal = new FuelStation(owner, sName, location);
+
+        // calling a method to create a post and passing our modal class.
+        Call<FuelStation> call = retrofitAPI.createPost(modal);
+
+        call.enqueue(new Callback<FuelStation>() {
+            @Override
+            public void onResponse(Call<FuelStation> call, Response<FuelStation> response) {
+//                Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
+                System.out.println("success");
+
+                inputOwner.setText("");
+                inputName.setText("");
+                inputLocation.setText("");
+
+                FuelStation responseFromAPI = response.body();
+
+//                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
+//                responseTV.setText(responseString);
+            }
+
+            @Override
+            public void onFailure(Call<FuelStation> call, Throwable t) {
+                    System.out.println(t.getMessage());
+//                responseTV.setText("Error found is : " + t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //add fuel station
+        inputOwner = getView().findViewById(R.id.inputOwner);
+        inputName = getView().findViewById(R.id.inputName);
+        inputLocation = getView().findViewById(R.id.inputLocation);
+        btnAdd = getView().findViewById(R.id.btnAdd);
+
+        // adding on click listener to the button.
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // validating if the text field is empty or not.
+                if (inputOwner.getText().toString().isEmpty() && inputName.getText().toString().isEmpty()  && inputLocation.getText().toString().isEmpty()) {
+//                    Toast.makeText(AddFuleStationFragment.this, "Please enter all the values", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // calling a method to post the data and passing variables.
+                postData(inputOwner.getText().toString(), inputName.getText().toString(), inputLocation.getText().toString());
+            }
+        });
     }
 
     @Override
