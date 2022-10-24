@@ -2,11 +2,14 @@ package com.fuelstationmanagerapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
 /**
@@ -25,9 +28,11 @@ public class UpdateFuelStatusFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String queueTypes[] = {"Available","Not Available"};
+    private String status[] = {"Available","Not Available"};
 
     private AutoCompleteTextView petrolStatusAutoCompleteTextView;
+    private ArrayAdapter<String> petrolStatusAdapter;
+
 
     public UpdateFuelStatusFragment() {
         // Required empty public constructor
@@ -65,5 +70,14 @@ public class UpdateFuelStatusFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_update_fuel_status, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+
+        petrolStatusAutoCompleteTextView = v.findViewById(R.id.petrolStatusInput);
+        petrolStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
+        petrolStatusAutoCompleteTextView.setAdapter(petrolStatusAdapter);
     }
 }
