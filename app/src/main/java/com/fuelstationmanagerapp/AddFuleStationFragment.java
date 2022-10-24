@@ -78,11 +78,9 @@ public class AddFuleStationFragment extends Fragment {
     private void postData(String owner, String sName, String location) {
         System.out.println("came in to post Data");
 
-        Api retrofitAPI = RetrofitClient.getInstance().getMyApi();
-        FuelStation modal = new FuelStation(owner, sName, location);
-
         // calling a method to create a post and passing our modal class.
-        Call<FuelStation> call = retrofitAPI.createPost(modal);
+        FuelStation modal = new FuelStation(owner, sName, location);
+        Call<FuelStation> call = RetrofitClient.getInstance().getMyApi().createFuelStation(modal);
 
         call.enqueue(new Callback<FuelStation>() {
             @Override
