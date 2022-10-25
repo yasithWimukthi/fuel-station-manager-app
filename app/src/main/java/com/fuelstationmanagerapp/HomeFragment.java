@@ -162,7 +162,7 @@ public class HomeFragment extends Fragment {
                 for (int i = 0; i < fuelStationList.size(); i++) {
                     fuelStationsNameArray[i] = fuelStationList.get(i).getName();
                 }
-                System.out.println("hi hashen.............."+fuelStationsNameArray[0]);
+//                System.out.println("hi hashen.............."+response.body());
                 fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStationsNameArray);
                 fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
             }
@@ -183,7 +183,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
                 FuelQueue fuelQueueObj = response.body();
-                System.out.println("success............"+fuelQueueObj);
+                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
 
             }
 

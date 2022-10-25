@@ -23,7 +23,7 @@ public interface Api {
     Call<List<FuelStation>> getFuelStations();
 
     //API method to get fuel queue
-    @GET("getQueue")
+    @GET("fuelQueues/getQueue")
     Call<FuelQueue> getFuelQueues(@Query("stationName") String stationName, @Query("vehicleType") String vehicleType,
                                   @Query("fuelType") String fuelType);
 }
