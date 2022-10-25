@@ -48,6 +48,8 @@ public class UpdateFuelStatusFragment extends Fragment {
     private EditText inputPetrolFinishTimeEditText;
     private EditText inputDieselArrivalTimeEditText;
     private EditText inputDieselFinishTimeEditText;
+    private EditText inputGasolineArrivalTimeEditText;
+    private EditText inputGasolineFinishTimeEditText;
 
     private String petrolStatus;
     private String dieselStatus;
