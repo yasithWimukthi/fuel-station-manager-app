@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fuelstationmanagerapp.dbModel.Customer;
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.model.QueueItem;
@@ -28,6 +29,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +51,8 @@ public class HomeFragment extends Fragment {
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
     private String fuelTypes[] = {"Petrol","Diesel","Gasoline"};
     List<FuelStation> fuelStationList = new ArrayList<>();
+    List<Customer> customerList = new ArrayList<>();
+
     FuelQueue fuelQueueObj;
 
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
@@ -64,7 +68,7 @@ public class HomeFragment extends Fragment {
 
     //display fuel queue
     private TextView fuelStationNameView, fuelTypeView, vehicleTypeView, fuelStatusView, vehicleCountView;
-//    private Button btnAdd;
+    private Button viewQueueBtn;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -123,6 +127,16 @@ public class HomeFragment extends Fragment {
         vehicleTypeView = getView().findViewById(R.id.vehicleType);
         fuelStatusView = getView().findViewById(R.id.fuelStatus);
         vehicleCountView = getView().findViewById(R.id.vehicleCount);
+        viewQueueBtn = getView().findViewById(R.id.viewQueueBtn);
+
+        // adding on click listener to the button.
+        viewQueueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFuelQueues(fuelStation, queueType, fuelType);
+
+            }
+        });
 
         /**
          * This is the listener for the queue type auto complete text view
@@ -154,17 +168,16 @@ public class HomeFragment extends Fragment {
         queueRecyclerView.setHasFixedSize(true);
         queueRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        QueueItem[] queueItems = new QueueItem[]{
-                new QueueItem("name1","status1","time1"),
-                new QueueItem("name2","status2","time2"),
-                new QueueItem("name3","status3","time3"),
-                new QueueItem("name4","status4","time4")
-        };
+//        QueueItem[] queueItems = new QueueItem[]{
+//                new QueueItem("name1","status1","time1"),
+//                new QueueItem("name2","status2","time2"),
+//                new QueueItem("name3","status3","time3"),
+//                new QueueItem("name4","status4","time4")
+//        };
 
-        QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
-        queueRecyclerView.setAdapter(queueAdapter);
+//        QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
+//        queueRecyclerView.setAdapter(queueAdapter);
 
-        getFuelQueues();
     }
 
     //API
@@ -194,8 +207,9 @@ public class HomeFragment extends Fragment {
     }
 
     //API
-    private void getFuelQueues() {
-        Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues("2nd", "Bike", "Petrol");
+    private void getFuelQueues(String stationName, String vehicleType, String fuelType) {
+        System.out.println(stationName+"  "+vehicleType+"  "+fuelType);
+        Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues(stationName, vehicleType, fuelType);
         call.enqueue(new Callback<FuelQueue>() {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
@@ -206,6 +220,18 @@ public class HomeFragment extends Fragment {
                 vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
                 fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
                 vehicleCountView.append(": "+fuelQueueObj.getCount());
+                customerList = fuelQueueObj.getCustomers();
+
+                //display customer list in card view
+                Customer[] customersArray = new Customer[customerList.size()];
+
+                for (int i = 0; i < customerList.size(); i++) {
+                    customersArray[i] = customerList.get(i);
+                }
+
+                QueueAdapter queueAdapter = new QueueAdapter(getContext(),customersArray);
+                queueRecyclerView.setAdapter(queueAdapter);
+
             }
 
             @Override
