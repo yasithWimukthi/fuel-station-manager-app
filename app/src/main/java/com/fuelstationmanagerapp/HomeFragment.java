@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.model.QueueItem;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
@@ -115,6 +116,7 @@ public class HomeFragment extends Fragment {
 
         fuelStationAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.fuelStationTypeInput);
         getFuelStations();
+
         /**
          * This is the listener for the fuel station auto complete text view
          */
@@ -145,6 +147,7 @@ public class HomeFragment extends Fragment {
         QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
         queueRecyclerView.setAdapter(queueAdapter);
 
+        getFuelQueues();
     }
 
     //API
@@ -166,6 +169,26 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<FuelStation>> call, Throwable t) {
+                System.out.println("error........."+t.getMessage());
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
+    //API
+    private void getFuelQueues() {
+        Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues("2nd", "Bike", "Petrol");
+        call.enqueue(new Callback<FuelQueue>() {
+            @Override
+            public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
+                FuelQueue fuelQueueObj = response.body();
+                System.out.println("success............"+fuelQueueObj);
+
+            }
+
+            @Override
+            public void onFailure(Call<FuelQueue> call, Throwable t) {
                 System.out.println("error........."+t.getMessage());
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
