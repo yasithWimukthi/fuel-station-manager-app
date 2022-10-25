@@ -43,15 +43,19 @@ public class HomeFragment extends Fragment {
 
     private String queueTypes[] = {"Motorcycle","Car","Three Wheeler"};
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
+    private String fuelTypes[] = {"Petrol","Diesel","Gasoline"};
     List<FuelStation> fuelStationList = new ArrayList<>();
 
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
     private AutoCompleteTextView fuelStationAutoCompleteTextView;
+    private AutoCompleteTextView fuelTypeAutoCompleteTextView;
     private RecyclerView queueRecyclerView;
     private ArrayAdapter<String> queueTypeAdapter;
     private ArrayAdapter<String> fuelStationAdapter;
+    private ArrayAdapter<String> fuelTypeAdapter;
     private String queueType;
     private String fuelStation;
+    private String fuelType;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -96,8 +100,11 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(v, savedInstanceState);
         queueRecyclerView = v.findViewById(R.id.queueRecyclerView);
         queueTypeAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.queueTypeInput);
+        fuelTypeAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.fuelTypeInput);
         queueTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, queueTypes);
+        fuelTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelTypes);
         queueTypeAutoCompleteTextView.setAdapter(queueTypeAdapter);
+        fuelTypeAutoCompleteTextView.setAdapter(fuelTypeAdapter);
 
         /**
          * This is the listener for the queue type auto complete text view
@@ -113,6 +120,13 @@ public class HomeFragment extends Fragment {
          */
         fuelStationAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             fuelStation = parent.getItemAtPosition(position).toString();
+        });
+
+        /**
+         * This is the listener for the fuel type auto complete text view
+         */
+        fuelTypeAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
+            fuelType = parent.getItemAtPosition(position).toString();
         });
 
         /**
