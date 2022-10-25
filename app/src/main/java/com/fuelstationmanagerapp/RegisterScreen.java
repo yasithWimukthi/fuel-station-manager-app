@@ -6,6 +6,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.widget.NestedScrollView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +28,28 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
 
     private final AppCompatActivity activity = RegisterScreen.this;
 
+    // creating constant keys for shared preferences.
+    public static final String SHARED_PREFS = "shared_prefs";
+
+    // key for storing email.
+    public static final String EMAIL_KEY = "email_key";
+
+    // key for storing password.
+    public static final String PASSWORD_KEY = "password_key";
+
+    // key for storing user name.
+    public static final String NAME_KEY = "name_key";
+
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    String email, password, name;
+
+    private TextView nameErrors;
     private TextView emailErrors;
     private TextView passwordErrors;
     private TextView confPasswordErrors;
 
+    private EditText editTextName;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
@@ -56,15 +77,18 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      * This method is to initialize views
      */
     private void initViews() {
+        nameErrors = (TextView) findViewById(R.id.nameErrors);
         emailErrors = (TextView) findViewById(R.id.emailErrors);
         passwordErrors = (TextView) findViewById(R.id.passwordErrors);
         confPasswordErrors = (TextView) findViewById(R.id.confPasswordErrors);
 
+        nameErrors.setVisibility(View.GONE);
         emailErrors.setVisibility(View.GONE);
         passwordErrors.setVisibility(View.GONE);
         confPasswordErrors.setVisibility(View.GONE);
 
 
+        editTextName = (EditText) findViewById(R.id.inputName);
         editTextEmail = (EditText) findViewById(R.id.inputEmail);
         editTextPassword = (EditText) findViewById(R.id.inputPassword);
         editTextConfirmPassword = (EditText) findViewById(R.id.confirmPassword);
@@ -73,6 +97,15 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
 
         buttonRegister = (Button) findViewById(R.id.btnRegister);
         goToLogin = (TextView) findViewById(R.id.gotoLogin);
+
+        // getting the data which is stored in shared preferences.
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        // default value is set to null if not present.
+        email = sharedpreferences.getString(EMAIL_KEY, null);
+        password = sharedpreferences.getString(PASSWORD_KEY, null);
+        name = sharedpreferences.getString(NAME_KEY, null);
+
     }
 
     /**
@@ -113,7 +146,10 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      * This method is to validate the input text fields and post data to SQLite
      */
     private void postDataToSQLite() {
-        Log.i("hey", "hey");
+//        Log.i("hey", "hey");
+        if (!inputValidation.isInputEditTextFilled(editTextName, nameErrors, getString(R.string.name_empty))) {
+            return;
+        }
         if (!inputValidation.isInputEditTextFilled(editTextEmail, emailErrors, getString(R.string.email_empty))) {
             return;
         }
@@ -139,14 +175,29 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
         }
 
         if (!databaseHelper.checkUser(editTextEmail.getText().toString().trim())) {
+
+            user.setName(editTextName.getText().toString().trim());
             user.setEmail(editTextEmail.getText().toString().trim());
             user.setPassword(editTextPassword.getText().toString().trim());
             user.setRole(((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString());
             databaseHelper.addUser(user);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+
+            // store email and password in shared preferences.
+            editor.putString(EMAIL_KEY, editTextEmail.getText().toString());
+            editor.putString(PASSWORD_KEY, editTextPassword.getText().toString());
+
+            // to save data with key and value.
+            editor.apply();
+
+            Intent mainIntent = new Intent(activity, MainActivity.class);
+
             // Snack Bar to show success message that record saved successfully
 //            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
             Toast.makeText( getBaseContext(), "User registered successfully",Toast.LENGTH_LONG).show();
             emptyInputEditText();
+            startActivity(mainIntent);
+
         } else {
             // Snack Bar to show error message that record already exists
 //            Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();

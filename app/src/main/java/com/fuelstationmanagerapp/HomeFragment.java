@@ -1,5 +1,7 @@
 package com.fuelstationmanagerapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,16 @@ import retrofit2.http.Query;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    // creating constant keys for shared preferences.
+    public static final String SHARED_PREFS = "shared_prefs";
+
+    // key for storing email.
+    public static final String EMAIL_KEY = "email_key";
+
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    String email;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -100,7 +112,12 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        // initializing our shared preferences.
+        sharedpreferences = getActivity().getApplicationContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
+        // storing it in our string variable.
+        email = sharedpreferences.getString(EMAIL_KEY, null);
+        System.out.println(".............."+email);
     }
 
     @Override

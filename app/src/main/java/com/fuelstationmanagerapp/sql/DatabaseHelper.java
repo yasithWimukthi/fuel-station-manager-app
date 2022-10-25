@@ -18,13 +18,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_USER = "user";
     // User Table Columns names
     private static final String COLUMN_USER_ID = "user_id";
+    private static final String COLUMN_USER_NAME = "user_name";
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_USER_PASSWORD = "user_password";
     private static final String COLUMN_USER_ROLE = "user_role";
 
     // create table sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_EMAIL + " TEXT,"
+            + COLUMN_USER_NAME + " TEXT," + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_EMAIL + " TEXT,"
             + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_ROLE + " TEXT" + ")";
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -57,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
         values.put(COLUMN_USER_ROLE, user.getRole());
