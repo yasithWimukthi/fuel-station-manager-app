@@ -1,37 +1,32 @@
 package com.fuelstationmanagerapp.model;
 
 public class QueueItem {
-    private String name;
+    private String customerName;
     private String status;
-    private String date;
+    private String arrivalTime;
+    private String departTime;
 
-    public QueueItem(String name, String status, String date) {
-        this.name = name;
+
+    public QueueItem(String customerName, String status, String arrivalTime, String departTime) {
+        this.customerName = customerName;
         this.status = status;
-        this.date = date;
+        this.arrivalTime = arrivalTime;
+        this.departTime = departTime;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String getCustomerName() {
+        return customerName;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getArrivalTime() {
+        return arrivalTime;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public String getDepartTime() {
+        return departTime;
     }
 }

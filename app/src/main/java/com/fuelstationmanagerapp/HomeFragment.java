@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fuelstationmanagerapp.dbModel.Customer;
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.model.QueueItem;
@@ -50,6 +51,8 @@ public class HomeFragment extends Fragment {
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
     private String fuelTypes[] = {"Petrol","Diesel","Gasoline"};
     List<FuelStation> fuelStationList = new ArrayList<>();
+    List<Customer> customerList = new ArrayList<>();
+
     FuelQueue fuelQueueObj;
 
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
@@ -165,15 +168,15 @@ public class HomeFragment extends Fragment {
         queueRecyclerView.setHasFixedSize(true);
         queueRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        QueueItem[] queueItems = new QueueItem[]{
-                new QueueItem("name1","status1","time1"),
-                new QueueItem("name2","status2","time2"),
-                new QueueItem("name3","status3","time3"),
-                new QueueItem("name4","status4","time4")
-        };
+//        QueueItem[] queueItems = new QueueItem[]{
+//                new QueueItem("name1","status1","time1"),
+//                new QueueItem("name2","status2","time2"),
+//                new QueueItem("name3","status3","time3"),
+//                new QueueItem("name4","status4","time4")
+//        };
 
-        QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
-        queueRecyclerView.setAdapter(queueAdapter);
+//        QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
+//        queueRecyclerView.setAdapter(queueAdapter);
 
     }
 
@@ -211,12 +214,24 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
                 fuelQueueObj = response.body();
-//                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
+                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
                 fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
                 fuelTypeView.append(": "+fuelQueueObj.getFuelType());
                 vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
                 fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
                 vehicleCountView.append(": "+fuelQueueObj.getCount());
+                customerList = fuelQueueObj.getCustomers();
+
+                //display customer list in card view
+                Customer[] customersArray = new Customer[customerList.size()];
+
+                for (int i = 0; i < customerList.size(); i++) {
+                    customersArray[i] = customerList.get(i);
+                }
+
+                QueueAdapter queueAdapter = new QueueAdapter(getContext(),customersArray);
+                queueRecyclerView.setAdapter(queueAdapter);
+
             }
 
             @Override

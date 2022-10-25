@@ -11,18 +11,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fuelstationmanagerapp.dbModel.Customer;
 import com.fuelstationmanagerapp.model.QueueItem;
 
 public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> {
 
     Context context;
-    QueueItem[] queueItems;
+    Customer[] queueItems;
 
     public QueueAdapter() {
 
     }
 
-    public QueueAdapter(Context context, QueueItem[] queueItems) {
+    public QueueAdapter(Context context, Customer[] queueItems) {
         this.context = context;
         this.queueItems = queueItems;
     }
@@ -38,16 +39,16 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final QueueItem queueItem = queueItems[position];
-        holder.textViewName.setText(queueItem.getName());
-        holder.textViewDate.setText(queueItem.getDate());
+        final Customer queueItem = queueItems[position];
+        holder.textViewName.setText(queueItem.getCustomerName());
+        holder.textViewDate.setText(queueItem.getArrivalTime());
 //        holder.statusImageView.setImageResource(queueItem.getMovieImage());
         holder.textViewStatus.setText(queueItem.getStatus());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, queueItem.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, queueItem.getCustomerName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
