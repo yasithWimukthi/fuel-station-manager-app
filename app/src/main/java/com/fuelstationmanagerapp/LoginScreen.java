@@ -3,7 +3,9 @@ package com.fuelstationmanagerapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +21,19 @@ import com.fuelstationmanagerapp.sql.DatabaseHelper;
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener{
 
     private final AppCompatActivity activity = LoginScreen.this;
+
+    // creating constant keys for shared preferences.
+    public static final String SHARED_PREFS = "shared_prefs";
+
+    // key for storing email.
+    public static final String EMAIL_KEY = "email_key";
+
+    // key for storing password.
+    public static final String PASSWORD_KEY = "password_key";
+
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    String email, password;
 
     private TextView emailErrors;
     private TextView passwordErrors;
@@ -57,6 +72,13 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
         buttonLogin = (Button) findViewById(R.id.btnLogin);
         goToRegister = (TextView) findViewById(R.id.gotoRegister);
+
+        // getting the data which is stored in shared preferences.
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
+        // default value is set to null if not present.
+        email = sharedpreferences.getString("EMAIL_KEY", null);
+        password = sharedpreferences.getString("PASSWORD_KEY", null);
     }
 
     /**
@@ -109,11 +131,20 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         }
         if (databaseHelper.checkUser(editTextEmail.getText().toString().trim()
                 , editTextPassword.getText().toString().trim())) {
-//            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
-//            accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+
+            // store email and password in shared preferences.
+            editor.putString(EMAIL_KEY, editTextEmail.getText().toString());
+            editor.putString(PASSWORD_KEY, editTextPassword.getText().toString());
+
+            // to save data with key and value.
+            editor.apply();
+
+            Intent mainIntent = new Intent(activity, MainActivity.class);
+            mainIntent.putExtra("EMAIL", editTextEmail.getText().toString().trim());
             emptyInputEditText();
             Toast.makeText( getBaseContext(), "User login success!",Toast.LENGTH_LONG).show();
-//            startActivity(accountsIntent);
+            startActivity(mainIntent);
         } else {
             // Snack Bar to show success message that record is wrong
 //            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
