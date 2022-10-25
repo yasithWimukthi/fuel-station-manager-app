@@ -117,6 +117,7 @@ public class HomeFragment extends Fragment {
 
         // storing it in our string variable.
         email = sharedpreferences.getString(EMAIL_KEY, null);
+        System.out.println(".............."+email);
     }
 
     @Override

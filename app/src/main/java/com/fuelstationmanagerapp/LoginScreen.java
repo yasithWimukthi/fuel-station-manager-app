@@ -77,8 +77,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
         // default value is set to null if not present.
-        email = sharedpreferences.getString("EMAIL_KEY", null);
-        password = sharedpreferences.getString("PASSWORD_KEY", null);
+        email = sharedpreferences.getString(EMAIL_KEY, null);
+        password = sharedpreferences.getString(PASSWORD_KEY, null);
     }
 
     /**
@@ -141,7 +141,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             editor.apply();
 
             Intent mainIntent = new Intent(activity, MainActivity.class);
-            mainIntent.putExtra("EMAIL", editTextEmail.getText().toString().trim());
             emptyInputEditText();
             Toast.makeText( getBaseContext(), "User login success!",Toast.LENGTH_LONG).show();
             startActivity(mainIntent);
@@ -159,5 +158,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private void emptyInputEditText() {
         editTextEmail.setText(null);
         editTextPassword.setText(null);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (email != null && password != null) {
+            Intent i = new Intent(LoginScreen.this, MainActivity.class);
+            startActivity(i);
+        }
     }
 }
