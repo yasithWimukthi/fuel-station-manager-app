@@ -1,5 +1,7 @@
 package com.fuelstationmanagerapp;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +44,10 @@ public class UpdateFuelStatusFragment extends Fragment {
     private ArrayAdapter<String> petrolStatusAdapter;
     private ArrayAdapter<String> dieselStatusAdapter;
     private ArrayAdapter<String> gasolineStatusAdapter;
+    private EditText inputPetrolArrivalTimeEditText;
+    private EditText inputPetrolFinishTimeEditText;
+    private EditText inputDieselArrivalTimeEditText;
+    private EditText inputDieselFinishTimeEditText;
 
     private String petrolStatus;
     private String dieselStatus;
@@ -94,6 +106,11 @@ public class UpdateFuelStatusFragment extends Fragment {
         gasolineStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
         gasolineStatusAutoCompleteTextView.setAdapter(gasolineStatusAdapter);
 
+        inputPetrolArrivalTimeEditText = v.findViewById(R.id.inputPetrolArrivalTime);
+        inputPetrolFinishTimeEditText = v.findViewById(R.id.inputPetrolFinishedTime);
+        inputDieselArrivalTimeEditText = v.findViewById(R.id.inputDieselArrivalTime);
+        inputDieselFinishTimeEditText = v.findViewById(R.id.inputDieselFinishedTime);
+
         /**
          *  This is the listener for the petrol status auto complete text view
          */
@@ -115,6 +132,79 @@ public class UpdateFuelStatusFragment extends Fragment {
         gasolineStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             gasolineStatus = parent.getItemAtPosition(position).toString();
     });
+
+        /**
+         * This is the listener for the petrol arrival time edit text
+         */
+        inputPetrolArrivalTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(inputPetrolArrivalTimeEditText);
+            }
+        });
+
+        /**
+         * This is the listener for the petrol finish time edit text
+         */
+        inputPetrolFinishTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(inputPetrolFinishTimeEditText);
+            }
+        });
+
+        /**
+         * This is the listener for the diesel arrival time edit text
+         */
+        inputDieselArrivalTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(inputDieselArrivalTimeEditText);
+            }
+    });
+
+        /**
+         * This is the listener for the diesel finish time edit text
+         */
+        inputDieselFinishTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(inputDieselFinishTimeEditText);
+            }
+        });
+    }
+
+    /**
+     * This method is used to show the date and time picker dialog
+     * @param date_time_in
+     */
+    private void showDateTimeDialog(final EditText date_time_in) {
+        final Calendar calendar=Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR,year);
+                calendar.set(Calendar.MONTH,month);
+                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+
+                TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                        calendar.set(Calendar.MINUTE,minute);
+
+                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd HH:mm");
+
+                        date_time_in.setText(simpleDateFormat.format(calendar.getTime()));
+                    }
+                };
+
+                new TimePickerDialog(getContext(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+            }
+        };
+
+        new DatePickerDialog(getContext(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+
     }
 
 }
