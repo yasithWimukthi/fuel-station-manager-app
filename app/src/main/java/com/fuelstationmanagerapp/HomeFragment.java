@@ -28,6 +28,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +65,7 @@ public class HomeFragment extends Fragment {
 
     //display fuel queue
     private TextView fuelStationNameView, fuelTypeView, vehicleTypeView, fuelStatusView, vehicleCountView;
-//    private Button btnAdd;
+    private Button viewQueueBtn;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -123,6 +124,16 @@ public class HomeFragment extends Fragment {
         vehicleTypeView = getView().findViewById(R.id.vehicleType);
         fuelStatusView = getView().findViewById(R.id.fuelStatus);
         vehicleCountView = getView().findViewById(R.id.vehicleCount);
+        viewQueueBtn = getView().findViewById(R.id.viewQueueBtn);
+
+        // adding on click listener to the button.
+        viewQueueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFuelQueues(fuelStation, queueType, fuelType);
+
+            }
+        });
 
         /**
          * This is the listener for the queue type auto complete text view
@@ -164,7 +175,6 @@ public class HomeFragment extends Fragment {
         QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
         queueRecyclerView.setAdapter(queueAdapter);
 
-        getFuelQueues();
     }
 
     //API
@@ -194,13 +204,14 @@ public class HomeFragment extends Fragment {
     }
 
     //API
-    private void getFuelQueues() {
-        Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues("2nd", "Bike", "Petrol");
+    private void getFuelQueues(String stationName, String vehicleType, String fuelType) {
+        System.out.println(stationName+"  "+vehicleType+"  "+fuelType);
+        Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues(stationName, vehicleType, fuelType);
         call.enqueue(new Callback<FuelQueue>() {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
                 fuelQueueObj = response.body();
-                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
+//                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
                 fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
                 fuelTypeView.append(": "+fuelQueueObj.getFuelType());
                 vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
