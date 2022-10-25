@@ -36,7 +36,7 @@ public class UpdateFuelStatusFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String status[] = {"Available","Not Available"};
+    private String status[] = {"Available", "Not Available"};
 
     private AutoCompleteTextView petrolStatusAutoCompleteTextView;
     private AutoCompleteTextView dieselStatusAutoCompleteTextView;
@@ -99,13 +99,13 @@ public class UpdateFuelStatusFragment extends Fragment {
         super.onViewCreated(v, savedInstanceState);
 
         petrolStatusAutoCompleteTextView = v.findViewById(R.id.petrolStatusInput);
-        petrolStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
+        petrolStatusAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, status);
         petrolStatusAutoCompleteTextView.setAdapter(petrolStatusAdapter);
         dieselStatusAutoCompleteTextView = v.findViewById(R.id.dieselStatusInput);
-        dieselStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
+        dieselStatusAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, status);
         dieselStatusAutoCompleteTextView.setAdapter(dieselStatusAdapter);
         gasolineStatusAutoCompleteTextView = v.findViewById(R.id.gasolineStatusInput);
-        gasolineStatusAdapter = new ArrayAdapter<String>(getContext(),R.layout.dropdown_list_item,status);
+        gasolineStatusAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, status);
         gasolineStatusAutoCompleteTextView.setAdapter(gasolineStatusAdapter);
 
         inputPetrolArrivalTimeEditText = v.findViewById(R.id.inputPetrolArrivalTime);
@@ -121,7 +121,7 @@ public class UpdateFuelStatusFragment extends Fragment {
 
         petrolStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             petrolStatus = parent.getItemAtPosition(position).toString();
-            });
+        });
 
         /**
          * This is the listener for the diesel status auto complete text view
@@ -135,7 +135,7 @@ public class UpdateFuelStatusFragment extends Fragment {
          */
         gasolineStatusAutoCompleteTextView.setOnItemClickListener((parent, view, position, id) -> {
             gasolineStatus = parent.getItemAtPosition(position).toString();
-    });
+        });
 
         /**
          * This is the listener for the petrol arrival time edit text
@@ -165,7 +165,7 @@ public class UpdateFuelStatusFragment extends Fragment {
             public void onClick(View v) {
                 showDateTimeDialog(inputDieselArrivalTimeEditText);
             }
-    });
+        });
 
         /**
          * This is the listener for the diesel finish time edit text
@@ -185,7 +185,7 @@ public class UpdateFuelStatusFragment extends Fragment {
             public void onClick(View v) {
                 showDateTimeDialog(inputGasolineArrivalTimeEditText);
             }
-    });
+        });
 
         /**
          * This is the listener for the gasoline finish time edit text
@@ -196,38 +196,41 @@ public class UpdateFuelStatusFragment extends Fragment {
                 showDateTimeDialog(inputGasolineFinishTimeEditText);
             }
         });
+
+
     }
 
     /**
      * This method is used to show the date and time picker dialog
+     *
      * @param date_time_in
      */
     private void showDateTimeDialog(final EditText date_time_in) {
-        final Calendar calendar=Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR,year);
-                calendar.set(Calendar.MONTH,month);
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                        calendar.set(Calendar.MINUTE,minute);
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE, minute);
 
-                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd HH:mm");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 
                         date_time_in.setText(simpleDateFormat.format(calendar.getTime()));
                     }
                 };
 
-                new TimePickerDialog(getContext(),timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+                new TimePickerDialog(getContext(), timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
             }
         };
 
-        new DatePickerDialog(getContext(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
 
