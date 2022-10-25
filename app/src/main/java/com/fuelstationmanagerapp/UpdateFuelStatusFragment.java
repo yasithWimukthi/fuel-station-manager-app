@@ -48,6 +48,8 @@ public class UpdateFuelStatusFragment extends Fragment {
     private EditText inputPetrolFinishTimeEditText;
     private EditText inputDieselArrivalTimeEditText;
     private EditText inputDieselFinishTimeEditText;
+    private EditText inputGasolineArrivalTimeEditText;
+    private EditText inputGasolineFinishTimeEditText;
 
     private String petrolStatus;
     private String dieselStatus;
@@ -110,6 +112,8 @@ public class UpdateFuelStatusFragment extends Fragment {
         inputPetrolFinishTimeEditText = v.findViewById(R.id.inputPetrolFinishedTime);
         inputDieselArrivalTimeEditText = v.findViewById(R.id.inputDieselArrivalTime);
         inputDieselFinishTimeEditText = v.findViewById(R.id.inputDieselFinishedTime);
+        inputGasolineArrivalTimeEditText = v.findViewById(R.id.inputGasolineArrivalTime);
+        inputGasolineFinishTimeEditText = v.findViewById(R.id.inputGasolineFinishedTime);
 
         /**
          *  This is the listener for the petrol status auto complete text view
@@ -170,6 +174,26 @@ public class UpdateFuelStatusFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showDateTimeDialog(inputDieselFinishTimeEditText);
+            }
+        });
+
+        /**
+         * This is the listener for the gasoline arrival time edit text
+         */
+        inputGasolineArrivalTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(inputGasolineArrivalTimeEditText);
+            }
+    });
+
+        /**
+         * This is the listener for the gasoline finish time edit text
+         */
+        inputGasolineFinishTimeEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(inputGasolineFinishTimeEditText);
             }
         });
     }
