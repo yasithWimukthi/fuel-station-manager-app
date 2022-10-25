@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
@@ -59,8 +62,13 @@ public class HomeFragment extends Fragment {
     private String fuelStation;
     private String fuelType;
 
+    //display fuel queue
+    private TextView fuelStationNameView, fuelTypeView, vehicleTypeView, fuelStatusView, vehicleCountView;
+//    private Button btnAdd;
+
     public HomeFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -88,6 +96,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -107,6 +116,13 @@ public class HomeFragment extends Fragment {
         fuelTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelTypes);
         queueTypeAutoCompleteTextView.setAdapter(queueTypeAdapter);
         fuelTypeAutoCompleteTextView.setAdapter(fuelTypeAdapter);
+
+        //display fuel queue
+        fuelStationNameView = getView().findViewById(R.id.fuelStationName);
+        fuelTypeView = getView().findViewById(R.id.fuelType);
+        vehicleTypeView = getView().findViewById(R.id.vehicleType);
+        fuelStatusView = getView().findViewById(R.id.fuelStatus);
+        vehicleCountView = getView().findViewById(R.id.vehicleCount);
 
         /**
          * This is the listener for the queue type auto complete text view
@@ -185,7 +201,11 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
                 fuelQueueObj = response.body();
                 System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
-
+                fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
+                fuelTypeView.append(": "+fuelQueueObj.getFuelType());
+                vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
+                fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
+                vehicleCountView.append(": "+fuelQueueObj.getCount());
             }
 
             @Override
