@@ -13,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.model.QueueItem;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
@@ -45,6 +49,7 @@ public class HomeFragment extends Fragment {
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
     private String fuelTypes[] = {"Petrol","Diesel","Gasoline"};
     List<FuelStation> fuelStationList = new ArrayList<>();
+    FuelQueue fuelQueueObj;
 
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
     private AutoCompleteTextView fuelStationAutoCompleteTextView;
@@ -57,8 +62,13 @@ public class HomeFragment extends Fragment {
     private String fuelStation;
     private String fuelType;
 
+    //display fuel queue
+    private TextView fuelStationNameView, fuelTypeView, vehicleTypeView, fuelStatusView, vehicleCountView;
+//    private Button btnAdd;
+
     public HomeFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -86,6 +96,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -106,6 +117,13 @@ public class HomeFragment extends Fragment {
         queueTypeAutoCompleteTextView.setAdapter(queueTypeAdapter);
         fuelTypeAutoCompleteTextView.setAdapter(fuelTypeAdapter);
 
+        //display fuel queue
+        fuelStationNameView = getView().findViewById(R.id.fuelStationName);
+        fuelTypeView = getView().findViewById(R.id.fuelType);
+        vehicleTypeView = getView().findViewById(R.id.vehicleType);
+        fuelStatusView = getView().findViewById(R.id.fuelStatus);
+        vehicleCountView = getView().findViewById(R.id.vehicleCount);
+
         /**
          * This is the listener for the queue type auto complete text view
          */
@@ -115,6 +133,7 @@ public class HomeFragment extends Fragment {
 
         fuelStationAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.fuelStationTypeInput);
         getFuelStations();
+
         /**
          * This is the listener for the fuel station auto complete text view
          */
@@ -145,6 +164,7 @@ public class HomeFragment extends Fragment {
         QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
         queueRecyclerView.setAdapter(queueAdapter);
 
+        getFuelQueues();
     }
 
     //API
@@ -159,13 +179,37 @@ public class HomeFragment extends Fragment {
                 for (int i = 0; i < fuelStationList.size(); i++) {
                     fuelStationsNameArray[i] = fuelStationList.get(i).getName();
                 }
-                System.out.println("hi hashen.............."+fuelStationsNameArray[0]);
+//                System.out.println("hi hashen.............."+response.body());
                 fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStationsNameArray);
                 fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
             }
 
             @Override
             public void onFailure(Call<List<FuelStation>> call, Throwable t) {
+                System.out.println("error........."+t.getMessage());
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
+    //API
+    private void getFuelQueues() {
+        Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues("2nd", "Bike", "Petrol");
+        call.enqueue(new Callback<FuelQueue>() {
+            @Override
+            public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
+                fuelQueueObj = response.body();
+                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
+                fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
+                fuelTypeView.append(": "+fuelQueueObj.getFuelType());
+                vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
+                fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
+                vehicleCountView.append(": "+fuelQueueObj.getCount());
+            }
+
+            @Override
+            public void onFailure(Call<FuelQueue> call, Throwable t) {
                 System.out.println("error........."+t.getMessage());
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
