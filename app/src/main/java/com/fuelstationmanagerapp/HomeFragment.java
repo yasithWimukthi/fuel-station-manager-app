@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
     private String fuelStations[] = {"Petrol Station","Diesel Station","Kerosene Station"};
     private String fuelTypes[] = {"Petrol","Diesel","Gasoline"};
     List<FuelStation> fuelStationList = new ArrayList<>();
+    FuelQueue fuelQueueObj;
 
     private AutoCompleteTextView queueTypeAutoCompleteTextView;
     private AutoCompleteTextView fuelStationAutoCompleteTextView;
@@ -182,7 +183,7 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<FuelQueue>() {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
-                FuelQueue fuelQueueObj = response.body();
+                fuelQueueObj = response.body();
                 System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
 
             }
