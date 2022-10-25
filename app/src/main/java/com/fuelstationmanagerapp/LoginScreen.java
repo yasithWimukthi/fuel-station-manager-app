@@ -31,6 +31,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     // key for storing password.
     public static final String PASSWORD_KEY = "password_key";
 
+    // key for storing user name.
+    public static final String NAME_KEY = "name_key";
+
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
     String email, password;
@@ -160,12 +163,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editTextPassword.setText(null);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (email != null && password != null) {
-            Intent i = new Intent(LoginScreen.this, MainActivity.class);
-            startActivity(i);
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if (email != null && password != null) {
+//            Intent i = new Intent(LoginScreen.this, MainActivity.class);
+//            startActivity(i);
+//        }
+//    }
 }

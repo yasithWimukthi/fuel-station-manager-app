@@ -1,9 +1,18 @@
 package com.fuelstationmanagerapp.model;
 
 public class User {
+    private String name;
     private String email;
     private String password;
     private String role;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;
