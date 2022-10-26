@@ -165,12 +165,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         editTextPassword.setText(null);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (email != null && password != null) {
-//            Intent i = new Intent(LoginScreen.this, MainActivity.class);
-//            startActivity(i);
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (email != null && password != null) {
+            Intent i = new Intent(LoginScreen.this, MainActivity.class);
+            startActivity(i);
+        }
+    }
 }

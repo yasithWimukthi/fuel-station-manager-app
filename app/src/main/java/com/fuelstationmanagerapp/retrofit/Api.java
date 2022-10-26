@@ -2,6 +2,7 @@ package com.fuelstationmanagerapp.retrofit;
 
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
+import com.fuelstationmanagerapp.dbModel.NameObj;
 import com.fuelstationmanagerapp.dbModel.SingleQueueObject;
 
 import java.util.List;
@@ -31,4 +32,12 @@ public interface Api {
     //API method to join fuel queue
     @POST("fuelQueues")
     Call<SingleQueueObject> joinTheQueue(@Body SingleQueueObject model);
+
+    //API method to exit before pump
+    @POST("fuelQueues/exitBeforePump")
+    Call<SingleQueueObject> exitBeforePump(@Body NameObj nameObj);
+
+    //API method to exit after pump
+    @POST("fuelQueues/exitAfterPump")
+    Call<SingleQueueObject> exitAfterPump(@Body NameObj nameObj);
 }
