@@ -13,13 +13,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fuelstationmanagerapp.dbModel.StationStatus;
 import com.fuelstationmanagerapp.model.FuelStation;
 
 public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.ViewHolder>{
     private Context context;
-    private FuelStation[] fuelStations;
+    private StationStatus[] fuelStations;
 
-    public FuelStationAdapter(Context context, FuelStation[] fuelStations) {
+    public FuelStationAdapter(Context context, StationStatus[] fuelStations) {
         this.context = context;
         this.fuelStations = fuelStations;
     }
@@ -35,11 +36,11 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final FuelStation fuelStation = fuelStations[position];
+        final StationStatus fuelStation = fuelStations[position];
         holder.textViewName.setText(fuelStation.getName());
-        holder.textViewPetrolStatus.setText(fuelStation.isPetrolStatus() ? "Available" : "Not Available");
-        holder.textViewDieselStatus.setText(fuelStation.isDieselStatus() ? "Available" : "Not Available");
-        holder.textViewGasolineStatus.setText(fuelStation.isGasolineStatus() ? "Available" : "Not Available");
+        holder.textViewPetrolStatus.setText(fuelStation.getPetrolStatus());
+        holder.textViewDieselStatus.setText(fuelStation.getDieselStatus());
+        holder.textViewGasolineStatus.setText(fuelStation.getGasolineStatus());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
