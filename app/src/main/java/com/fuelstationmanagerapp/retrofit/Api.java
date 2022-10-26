@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
@@ -28,6 +29,10 @@ public interface Api {
     //API method to get fuel stations by owner name
     @GET("fuelStations/owner")
     Call<List<StationStatus>> getFuelStationsByOwner(@Query("owner") String owner);
+
+    //API method to set fuel Status
+    @POST("fuelStations/addStatus/{id}")
+    Call<StationStatus> setFuelStatus(@Path("id") String id, @Body StationStatus stationStatus);
 
     //API method to get fuel queue
     @GET("fuelQueues/getQueue")

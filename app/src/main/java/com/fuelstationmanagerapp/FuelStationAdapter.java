@@ -19,6 +19,7 @@ import com.fuelstationmanagerapp.model.FuelStation;
 public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.ViewHolder>{
     private Context context;
     private StationStatus[] fuelStations;
+    private String _id;
 
     public FuelStationAdapter(Context context, StationStatus[] fuelStations) {
         this.context = context;
@@ -45,6 +46,7 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                _id = fuelStation.get_id();
                 Toolbar toolbar = ((MainActivity)context).findViewById(R.id.toolbar);
                 toolbar.setTitle("Update Fuel Station");
                 FragmentTransaction transaction = ((MainActivity)context).getSupportFragmentManager().beginTransaction();
