@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        app:cardElevation="10dp"
+        app:cardElevation="5dp"
         app:cardCornerRadius="10dp"
         android:layout_margin="5dp"
         app:cardBackgroundColor="#FFFFFF"
@@ -29,7 +29,8 @@
                     android:id="@+id/textName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
                     android:drawableStart="@drawable/ic_baseline_circle_green"
                     android:text="Name"
                     android:textAlignment="center"
