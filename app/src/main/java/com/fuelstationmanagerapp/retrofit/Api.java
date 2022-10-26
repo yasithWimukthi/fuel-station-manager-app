@@ -4,6 +4,7 @@ import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.dbModel.NameObj;
 import com.fuelstationmanagerapp.dbModel.SingleQueueObject;
+import com.fuelstationmanagerapp.dbModel.StationStatus;
 
 import java.util.List;
 
@@ -23,6 +24,10 @@ public interface Api {
     //API method to get all fuel stations
     @GET("fuelStations")
     Call<List<FuelStation>> getFuelStations();
+
+    //API method to get fuel stations by owner name
+    @GET("fuelStations/owner")
+    Call<List<StationStatus>> getFuelStationsByOwner(@Query("owner") String owner);
 
     //API method to get fuel queue
     @GET("fuelQueues/getQueue")

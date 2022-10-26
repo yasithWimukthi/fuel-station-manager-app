@@ -42,6 +42,7 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
         final Customer queueItem = queueItems[position];
         holder.textViewName.setText(queueItem.getCustomerName());
         holder.textViewDate.setText(queueItem.getArrivalTime());
+        holder.textViewDate.setText(queueItem.getDepartTime());
 //        holder.statusImageView.setImageResource(queueItem.getMovieImage());
         holder.textViewStatus.setText(queueItem.getStatus());
 

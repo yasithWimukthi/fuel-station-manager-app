@@ -128,7 +128,6 @@ public class HomeFragment extends Fragment {
 
         // storing it in our string variable.
         email = sharedpreferences.getString(EMAIL_KEY, null);
-        System.out.println(".............."+email);
     }
 
     @Override
@@ -334,15 +333,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
 
-                System.out.println("hashen................");
-                System.out.println(response.body());
-
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-                System.out.println(t.getMessage());
 
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
