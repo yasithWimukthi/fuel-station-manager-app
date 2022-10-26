@@ -1,5 +1,6 @@
 package com.fuelstationmanagerapp.sql;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     // create table sql query
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
-            + COLUMN_USER_NAME + " TEXT," + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_EMAIL + " TEXT,"
+             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT," + COLUMN_USER_EMAIL + " TEXT,"
             + COLUMN_USER_PASSWORD + " TEXT," + COLUMN_USER_ROLE + " TEXT" + ")";
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -142,5 +143,39 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             return true;
         }
         return false;
+    }
+
+    @SuppressLint("Range")
+    public String getUserName(String email){
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_USER_NAME
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_USER_EMAIL + " = ?";
+        // selection arguments
+        String[] selectionArgs = {email};
+
+        Cursor cursor = db.query(TABLE_USER, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);
+
+        String data = null;
+        if (cursor.moveToFirst()){
+            do{
+                 data = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME));
+                // do what ever you want here
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        System.out.println(data);
+
+        return data;
+
     }
 }
