@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class FuelQueue {
 
+    private String fuelStationId;
     private String fuelStationName;
     private String fuelType;
     private String vehicleType;
@@ -11,13 +12,18 @@ public class FuelQueue {
     private int count;
     private ArrayList<Customer> customers;
 
-    public FuelQueue(String fuelStationName, String fuelType, String vehicleType, String fuelStatus, int count, ArrayList<Customer> customers) {
+    public FuelQueue(String fuelStationId,String fuelStationName, String fuelType, String vehicleType, String fuelStatus, int count, ArrayList<Customer> customers) {
+        this.fuelStationId = fuelStationId;
         this.fuelStationName = fuelStationName;
         this.fuelType = fuelType;
         this.vehicleType = vehicleType;
         this.fuelStatus = fuelStatus;
         this.count = count;
         this.customers = customers;
+    }
+
+    public String getFuelStationId() {
+        return fuelStationId;
     }
 
     public String getFuelStationName() {
