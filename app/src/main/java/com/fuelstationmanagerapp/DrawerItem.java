@@ -11,7 +11,6 @@ public abstract class DrawerItem<T extends DrawerAdapter.ViewHolder> {
         this.isChecked = checked;
         return this;
     }
-
     public boolean isChecked() {
         return isChecked;
     }

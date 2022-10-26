@@ -64,6 +64,15 @@ public class InputValidation {
         return true;
     }
 
+    /**
+     * method to check InputEditText has valid email .
+     *
+     * @param editText1
+     * @param editText2
+     * @param textView
+     * @param message
+     * @return
+     */
     public boolean isInputEditTextMatches(EditText editText1, EditText editText2, TextView textView, String message) {
         String value1 = editText1.getText().toString().trim();
         String value2 = editText2.getText().toString().trim();

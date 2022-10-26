@@ -161,14 +161,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getFuelQueues(fuelStation, queueType, fuelType);
-
             }
         });
         //find buttons join and update queue buttons by id
         joinQueue = getView().findViewById(R.id.joinToQueueBtn);
         exitBefore = getView().findViewById(R.id.beforePumpBtn);
         exitAfter = getView().findViewById(R.id.afterPumpBtn);
-
 
         //adding on click listners for join and update queue buttons
         joinQueue.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +242,6 @@ public class HomeFragment extends Fragment {
                 for (int i = 0; i < fuelStationList.size(); i++) {
                     fuelStationsNameArray[i] = fuelStationList.get(i).getName();
                 }
-//                System.out.println("hi hashen.............."+response.body());
                 fuelStationAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelStationsNameArray);
                 fuelStationAutoCompleteTextView.setAdapter(fuelStationAdapter);
             }
@@ -252,7 +249,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<List<FuelStation>> call, Throwable t) {
                 System.out.println("error........."+t.getMessage());
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -274,7 +270,6 @@ public class HomeFragment extends Fragment {
                     fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
                     vehicleCountView.append(": "+fuelQueueObj.getCount());
                 }
-
                 customerList = fuelQueueObj.getCustomers();
 
                 //display customer list in card view
@@ -292,7 +287,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<FuelQueue> call, Throwable t) {
                 System.out.println("error........."+t.getMessage());
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
         });
@@ -321,7 +315,6 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
-
         });
     }
 
@@ -332,13 +325,11 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
