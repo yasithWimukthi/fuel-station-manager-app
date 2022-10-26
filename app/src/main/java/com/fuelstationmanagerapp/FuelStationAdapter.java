@@ -39,9 +39,9 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final StationStatus fuelStation = fuelStations[position];
         holder.textViewName.setText(fuelStation.getName());
-        holder.textViewPetrolStatus.setText(fuelStation.getPetrolStatus());
-        holder.textViewDieselStatus.setText(fuelStation.getDieselStatus());
-        holder.textViewGasolineStatus.setText(fuelStation.getGasolineStatus());
+        holder.textViewPetrolStatus.setText("Petrol: "+fuelStation.getPetrolStatus());
+        holder.textViewDieselStatus.setText("Diesel: "+fuelStation.getDieselStatus());
+        holder.textViewGasolineStatus.setText("Gasoline: "+fuelStation.getGasolineStatus());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
