@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.fuelstationmanagerapp.dbModel.Customer;
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
+import com.fuelstationmanagerapp.dbModel.NameObj;
 import com.fuelstationmanagerapp.dbModel.SingleQueueObject;
 import com.fuelstationmanagerapp.model.QueueItem;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
@@ -181,6 +182,26 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        exitBefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("clicked");
+                if(fuelQueueObj!=null){
+                    exitBeforePump(sharedpreferences.getString(NAME_KEY, null));
+                }
+            }
+        });
+
+        exitAfter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("clicked");
+                if(fuelQueueObj!=null){
+                    exitAfterPump(sharedpreferences.getString(NAME_KEY, null));
+                }
+            }
+        });
         /**
          * This is the listener for the queue type auto complete text view
          */
@@ -240,19 +261,21 @@ public class HomeFragment extends Fragment {
 
     //API
     private void getFuelQueues(String stationName, String vehicleType, String fuelType) {
-        System.out.println(stationName+"  "+vehicleType+"  "+fuelType);
         Call<FuelQueue> call = RetrofitClient.getInstance().getMyApi().getFuelQueues(stationName, vehicleType, fuelType);
         call.enqueue(new Callback<FuelQueue>() {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
                 fuelQueueObj = response.body();
 
-                System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
-                fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
-                fuelTypeView.append(": "+fuelQueueObj.getFuelType());
-                vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
-                fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
-                vehicleCountView.append(": "+fuelQueueObj.getCount());
+                //added if condition to avoid multiple appends
+                if(fuelStationNameView.getText().toString().equals("Station Name")){
+                    fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
+                    fuelTypeView.append(": "+fuelQueueObj.getFuelType());
+                    vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
+                    fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
+                    vehicleCountView.append(": "+fuelQueueObj.getCount());
+                }
+
                 customerList = fuelQueueObj.getCustomers();
 
                 //display customer list in card view
@@ -302,4 +325,47 @@ public class HomeFragment extends Fragment {
 
         });
     }
+
+    //API
+    private void exitBeforePump(String name) {
+        NameObj nameObj = new NameObj(name);
+        Call<SingleQueueObject> call = RetrofitClient.getInstance().getMyApi().exitBeforePump(nameObj);
+        call.enqueue(new Callback<SingleQueueObject>() {
+            @Override
+            public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
+
+                System.out.println("hashen................");
+                System.out.println(response.body());
+
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<SingleQueueObject> call, Throwable t) {
+                System.out.println(t.getMessage());
+
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
+    //API
+    private void exitAfterPump(String name) {
+        NameObj nameObj = new NameObj(name);
+        Call<SingleQueueObject> call = RetrofitClient.getInstance().getMyApi().exitAfterPump(nameObj);
+        call.enqueue(new Callback<SingleQueueObject>() {
+            @Override
+            public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<SingleQueueObject> call, Throwable t) {
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
 }
