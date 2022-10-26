@@ -136,9 +136,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 , editTextPassword.getText().toString().trim())) {
             SharedPreferences.Editor editor = sharedpreferences.edit();
 
+            String username = databaseHelper.getUserName(editTextEmail.getText().toString());
             // store email and password in shared preferences.
             editor.putString(EMAIL_KEY, editTextEmail.getText().toString());
             editor.putString(PASSWORD_KEY, editTextPassword.getText().toString());
+            editor.putString(NAME_KEY, username);
 
             // to save data with key and value.
             editor.apply();

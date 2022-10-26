@@ -2,6 +2,7 @@ package com.fuelstationmanagerapp.retrofit;
 
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
+import com.fuelstationmanagerapp.dbModel.SingleQueueObject;
 
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface Api {
     @GET("fuelQueues/getQueue")
     Call<FuelQueue> getFuelQueues(@Query("stationName") String stationName, @Query("vehicleType") String vehicleType,
                                   @Query("fuelType") String fuelType);
+
+    //API method to join fuel queue
+    @POST("fuelQueues")
+    Call<SingleQueueObject> joinTheQueue(@Body SingleQueueObject model);
 }

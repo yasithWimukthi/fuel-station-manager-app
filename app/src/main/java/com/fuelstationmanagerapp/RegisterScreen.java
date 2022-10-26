@@ -186,6 +186,8 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
             // store email and password in shared preferences.
             editor.putString(EMAIL_KEY, editTextEmail.getText().toString());
             editor.putString(PASSWORD_KEY, editTextPassword.getText().toString());
+            editor.putString(NAME_KEY, editTextName.getText().toString());
+
 
             // to save data with key and value.
             editor.apply();

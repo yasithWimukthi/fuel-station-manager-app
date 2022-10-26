@@ -18,10 +18,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fuelstationmanagerapp.dbModel.Customer;
 import com.fuelstationmanagerapp.dbModel.FuelQueue;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
+import com.fuelstationmanagerapp.dbModel.SingleQueueObject;
 import com.fuelstationmanagerapp.model.QueueItem;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
 
@@ -45,6 +47,9 @@ public class HomeFragment extends Fragment {
 
     // key for storing email.
     public static final String EMAIL_KEY = "email_key";
+
+    // key for storing username.
+    public static final String NAME_KEY = "name_key";
 
     // variable for shared preferences.
     SharedPreferences sharedpreferences;
@@ -78,9 +83,14 @@ public class HomeFragment extends Fragment {
     private String fuelStation;
     private String fuelType;
 
+
     //display fuel queue
     private TextView fuelStationNameView, fuelTypeView, vehicleTypeView, fuelStatusView, vehicleCountView;
     private Button viewQueueBtn;
+
+    //Initialising join and update queue buttons
+    private Button joinQueue, exitBefore, exitAfter;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -154,7 +164,23 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        //find buttons join and update queue buttons by id
+        joinQueue = getView().findViewById(R.id.joinToQueueBtn);
+        exitBefore = getView().findViewById(R.id.beforePumpBtn);
+        exitAfter = getView().findViewById(R.id.afterPumpBtn);
 
+
+        //adding on click listners for join and update queue buttons
+        joinQueue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fuelQueueObj!=null){
+                    SingleQueueObject singleQueueObject = initSingleQueueObject();
+                    singleQueueObject.setStatus("in");
+                    joinFuelQueue(singleQueueObject);
+                }
+            }
+        });
         /**
          * This is the listener for the queue type auto complete text view
          */
@@ -184,17 +210,6 @@ public class HomeFragment extends Fragment {
          */
         queueRecyclerView.setHasFixedSize(true);
         queueRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        QueueItem[] queueItems = new QueueItem[]{
-//                new QueueItem("name1","status1","time1"),
-//                new QueueItem("name2","status2","time2"),
-//                new QueueItem("name3","status3","time3"),
-//                new QueueItem("name4","status4","time4")
-//        };
-
-//        QueueAdapter queueAdapter = new QueueAdapter(getContext(),queueItems);
-//        queueRecyclerView.setAdapter(queueAdapter);
-
     }
 
     //API
@@ -231,6 +246,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<FuelQueue> call, Response<FuelQueue> response) {
                 fuelQueueObj = response.body();
+
                 System.out.println("success............"+fuelQueueObj.getCustomers().get(0).getCustomerName());
                 fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
                 fuelTypeView.append(": "+fuelQueueObj.getFuelType());
@@ -254,6 +270,33 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<FuelQueue> call, Throwable t) {
                 System.out.println("error........."+t.getMessage());
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
+    //Initialise singleQueueObject
+    private SingleQueueObject initSingleQueueObject(){
+        SingleQueueObject singleQueueObject = new SingleQueueObject();
+        singleQueueObject.setFuelStation(fuelQueueObj.getFuelStationId());
+        singleQueueObject.setFuelTypeName(fuelType);
+        singleQueueObject.setCustomerName(sharedpreferences.getString(NAME_KEY, null));
+        singleQueueObject.setVehicleType(queueType);
+
+        return singleQueueObject;
+    }
+    //API
+    private void joinFuelQueue(SingleQueueObject singleQueueObject) {
+        Call<SingleQueueObject> call = RetrofitClient.getInstance().getMyApi().joinTheQueue(singleQueueObject);
+        call.enqueue(new Callback<SingleQueueObject>() {
+            @Override
+            public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<SingleQueueObject> call, Throwable t) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
