@@ -62,6 +62,7 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
         ImageView statusImageView;
         TextView textViewName;
         TextView textViewDate;
+        TextView textViewDepartTime;
         TextView textViewStatus;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +70,7 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
             textViewName = itemView.findViewById(R.id.textName);
             textViewDate = itemView.findViewById(R.id.textDate);
             textViewStatus = itemView.findViewById(R.id.textStatus);
+            textViewDepartTime = itemView.findViewById(R.id.departTime);
         }
     }
 }
