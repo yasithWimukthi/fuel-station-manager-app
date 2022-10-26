@@ -2,6 +2,7 @@ package com.fuelstationmanagerapp.dbModel;
 
 public class StationStatus {
 
+    private String _id;
     private String name;
     private String owner;
     private String location;
@@ -16,7 +17,11 @@ public class StationStatus {
     private String gasolineFinishedTime;
 
 
-    public StationStatus(String name, String owner, String location, String petrolStatus, String petrolArrivalTime, String petrolFinishedTime, String dieselStatus, String dieselArrivalTime, String dieselFinishedTime, String gasolineStatus, String gasolineArrivalTime, String gasolineFinishedTime) {
+    public StationStatus( ) {
+    }
+
+    public StationStatus(String _id, String name, String owner, String location, String petrolStatus, String petrolArrivalTime, String petrolFinishedTime, String dieselStatus, String dieselArrivalTime, String dieselFinishedTime, String gasolineStatus, String gasolineArrivalTime, String gasolineFinishedTime) {
+        this._id = _id;
         this.name = name;
         this.owner = owner;
         this.location = location;
@@ -29,6 +34,14 @@ public class StationStatus {
         this.gasolineStatus = gasolineStatus;
         this.gasolineArrivalTime = gasolineArrivalTime;
         this.gasolineFinishedTime = gasolineFinishedTime;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getName() {
