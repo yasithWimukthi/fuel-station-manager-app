@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
         list.setAdapter(adapter);
 
         adapter.setSelected(POS_DASHBOARD);
-
     }
 
     private DrawerItem createItemFor(int position){

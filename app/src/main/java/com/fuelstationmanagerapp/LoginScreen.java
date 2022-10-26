@@ -150,10 +150,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             Toast.makeText( getBaseContext(), "User login success!",Toast.LENGTH_LONG).show();
             startActivity(mainIntent);
         } else {
-            // Snack Bar to show success message that record is wrong
-//            Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();
             Toast.makeText( getBaseContext(), "User login failed!",Toast.LENGTH_LONG).show();
-
         }
     }
 

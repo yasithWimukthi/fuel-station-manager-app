@@ -115,16 +115,6 @@ public class FuelStationsFragment extends Fragment {
 
         fuelStationsRecyclerView.setHasFixedSize(true);
         fuelStationsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        FuelStation[] fuelStations = new FuelStation[]{
-//                new FuelStation("station 1", true, false, false),
-//                new FuelStation("station 2", false, true, false),
-//                new FuelStation("station 3", false, false, true),
-//                new FuelStation("station 4", true, false, false),
-//        };
-
-//        FuelStationAdapter fuelStationsAdapter = new FuelStationAdapter(getContext(),fuelStations);
-//        fuelStationsRecyclerView.setAdapter(fuelStationsAdapter);
     }
 
     //Api method
@@ -148,12 +138,10 @@ public class FuelStationsFragment extends Fragment {
 
                 FuelStationAdapter fuelStationsAdapter = new FuelStationAdapter(getContext(),stationStatuses);
                 fuelStationsRecyclerView.setAdapter(fuelStationsAdapter);
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call<List<StationStatus>> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
         });
