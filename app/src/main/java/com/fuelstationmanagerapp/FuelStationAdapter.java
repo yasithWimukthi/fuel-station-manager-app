@@ -1,6 +1,7 @@
 package com.fuelstationmanagerapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,9 @@ public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.
                 FragmentTransaction transaction = ((MainActivity)context).getSupportFragmentManager().beginTransaction();
                 UpdateFuelStatusFragment updateFuelStatusFragment = new UpdateFuelStatusFragment();
                 transaction.replace(R.id.container, updateFuelStatusFragment);
+//                Bundle bundle = new Bundle();
+//              bundle.putSerializable("fuelStation", fuelStation);
+//                getParentFragmentManager().setFragmentResult("fuelStation", bundle);
                 transaction.commit();
             }
         });
