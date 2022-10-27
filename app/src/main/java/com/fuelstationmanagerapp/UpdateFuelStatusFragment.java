@@ -37,7 +37,7 @@ import retrofit2.Response;
  */
 public class UpdateFuelStatusFragment extends Fragment {
 
-    private String id = "6357146b7078e001c7c5f1ed";
+    private String id = "635191023374b23e5984df0b";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,6 +57,8 @@ public class UpdateFuelStatusFragment extends Fragment {
     private ArrayAdapter<String> dieselStatusAdapter;
     private ArrayAdapter<String> gasolineStatusAdapter;
     private EditText inputPetrolArrivalTimeEditText;
+    private EditText stationNameText;
+    private EditText locationNameText;
     private EditText inputPetrolFinishTimeEditText;
     private EditText inputDieselArrivalTimeEditText;
     private EditText inputDieselFinishTimeEditText;
@@ -68,6 +70,7 @@ public class UpdateFuelStatusFragment extends Fragment {
     private String dieselStatus;
     private String gasolineStatus;
 
+    StationStatus stationStatusObj = new StationStatus();
 
     public UpdateFuelStatusFragment() {
         // Required empty public constructor
@@ -122,6 +125,8 @@ public class UpdateFuelStatusFragment extends Fragment {
         gasolineStatusAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, status);
         gasolineStatusAutoCompleteTextView.setAdapter(gasolineStatusAdapter);
 
+        stationNameText = v.findViewById(R.id.inputName);
+        locationNameText = v.findViewById(R.id.inputLocation);
         inputPetrolArrivalTimeEditText = v.findViewById(R.id.inputPetrolArrivalTime);
         inputPetrolFinishTimeEditText = v.findViewById(R.id.inputPetrolFinishedTime);
         inputDieselArrivalTimeEditText = v.findViewById(R.id.inputDieselArrivalTime);
@@ -129,6 +134,8 @@ public class UpdateFuelStatusFragment extends Fragment {
         inputGasolineArrivalTimeEditText = v.findViewById(R.id.inputGasolineArrivalTime);
         inputGasolineFinishTimeEditText = v.findViewById(R.id.inputGasolineFinishedTime);
         buttonUpdate = v.findViewById(R.id.btnUpdate);
+        getFuelStation();
+
 
         /**
          *  This is the listener for the petrol status auto complete text view
@@ -273,6 +280,36 @@ public class UpdateFuelStatusFragment extends Fragment {
         stationStatus.setGasolineFinishedTime(inputGasolineFinishTimeEditText.getText().toString());
 
         return stationStatus;
+    }
+
+    //API call
+    public void getFuelStation(){
+        Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().getSingleFuelStation(id);
+        call.enqueue(new Callback<StationStatus>() {
+            @Override
+            public void onResponse(Call<StationStatus> call, Response<StationStatus> response) {
+                System.out.println("fetch success");
+                stationStatusObj = response.body();
+                System.out.println(response.body());
+                stationNameText.setText(stationStatusObj.getName());
+                locationNameText.setText(stationStatusObj.getLocation());
+                inputPetrolArrivalTimeEditText.setText(stationStatusObj.getPetrolArrivalTime());
+                inputPetrolFinishTimeEditText.setText(stationStatusObj.getPetrolFinishedTime());
+                inputDieselArrivalTimeEditText.setText(stationStatusObj.getDieselArrivalTime());
+                inputDieselFinishTimeEditText.setText(stationStatusObj.getDieselFinishedTime());
+                inputGasolineArrivalTimeEditText.setText(stationStatusObj.getGasolineArrivalTime());
+                inputGasolineFinishTimeEditText.setText(stationStatusObj.getGasolineFinishedTime());
+
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<StationStatus> call, Throwable t) {
+                System.out.println("fetch failed");
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 
     //API call

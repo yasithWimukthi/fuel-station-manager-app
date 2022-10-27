@@ -26,6 +26,10 @@ public interface Api {
     @GET("fuelStations")
     Call<List<FuelStation>> getFuelStations();
 
+    //API method to get a single fuel station
+    @GET("fuelStations/single/{id}")
+    Call<StationStatus> getSingleFuelStation(@Path("id") String id);
+
     //API method to get fuel stations by owner name
     @GET("fuelStations/owner")
     Call<List<StationStatus>> getFuelStationsByOwner(@Query("owner") String owner);
