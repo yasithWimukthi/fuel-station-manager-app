@@ -13,12 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.fuelstationmanagerapp.dbModel.StationStatus;
+import com.fuelstationmanagerapp.dbModel.StationStatus;
+import com.fuelstationmanagerapp.retrofit.RetrofitClient;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +35,8 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 public class UpdateFuelStatusFragment extends Fragment {
+
+    private String id = "6357146b7078e001c7c5f1ed";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +61,7 @@ public class UpdateFuelStatusFragment extends Fragment {
     private EditText inputDieselFinishTimeEditText;
     private EditText inputGasolineArrivalTimeEditText;
     private EditText inputGasolineFinishTimeEditText;
+    private Button buttonUpdate;
 
     private String petrolStatus;
     private String dieselStatus;
@@ -115,6 +127,7 @@ public class UpdateFuelStatusFragment extends Fragment {
         inputDieselFinishTimeEditText = v.findViewById(R.id.inputDieselFinishedTime);
         inputGasolineArrivalTimeEditText = v.findViewById(R.id.inputGasolineArrivalTime);
         inputGasolineFinishTimeEditText = v.findViewById(R.id.inputGasolineFinishedTime);
+        buttonUpdate = v.findViewById(R.id.btnUpdate);
 
         /**
          *  This is the listener for the petrol status auto complete text view
@@ -198,6 +211,13 @@ public class UpdateFuelStatusFragment extends Fragment {
             }
         });
 
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFuelStatus();
+            }
+        });
+
 
     }
 
@@ -224,6 +244,7 @@ public class UpdateFuelStatusFragment extends Fragment {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
 
                         date_time_in.setText(simpleDateFormat.format(calendar.getTime()));
+
                     }
                 };
 
@@ -233,6 +254,51 @@ public class UpdateFuelStatusFragment extends Fragment {
 
         new DatePickerDialog(getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
 
+    }
+
+    public StationStatus createStatusObject(){
+        StationStatus stationStatus = new StationStatus();
+
+        stationStatus.setPetrolStatus(petrolStatus);
+        stationStatus.setDieselStatus(dieselStatus);
+        stationStatus.setGasolineStatus(gasolineStatus);
+
+        stationStatus.setPetrolArrivalTime(inputPetrolArrivalTimeEditText.getText().toString());
+        stationStatus.setDieselArrivalTime(inputDieselArrivalTimeEditText.getText().toString());
+        stationStatus.setGasolineArrivalTime(inputGasolineArrivalTimeEditText.getText().toString());
+
+        stationStatus.setPetrolFinishedTime(inputPetrolFinishTimeEditText.getText().toString());
+        stationStatus.setDieselFinishedTime(inputDieselFinishTimeEditText.getText().toString());
+        stationStatus.setGasolineFinishedTime(inputGasolineFinishTimeEditText.getText().toString());
+
+        return stationStatus;
+    }
+
+    //API call
+    public void setFuelStatus(){
+        StationStatus stationStatus = createStatusObject();
+
+        System.out.println(stationStatus.getPetrolStatus());
+        System.out.println(stationStatus.getPetrolArrivalTime());
+        System.out.println(stationStatus.getPetrolFinishedTime());
+        System.out.println(stationStatus.getDieselStatus());
+
+
+        Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().setFuelStatus(id, stationStatus);
+        call.enqueue(new Callback<StationStatus>() {
+            @Override
+            public void onResponse(Call<StationStatus> call, Response<StationStatus> response) {
+                System.out.println("update success");
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<StationStatus> call, Throwable t) {
+                System.out.println("update failed");
+//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 
 }

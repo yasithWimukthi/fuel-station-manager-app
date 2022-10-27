@@ -188,21 +188,16 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
             editor.putString(PASSWORD_KEY, editTextPassword.getText().toString());
             editor.putString(NAME_KEY, editTextName.getText().toString());
 
-
             // to save data with key and value.
             editor.apply();
 
             Intent mainIntent = new Intent(activity, MainActivity.class);
 
-            // Snack Bar to show success message that record saved successfully
-//            Snackbar.make(nestedScrollView, getString(R.string.success_message), Snackbar.LENGTH_LONG).show();
             Toast.makeText( getBaseContext(), "User registered successfully",Toast.LENGTH_LONG).show();
             emptyInputEditText();
             startActivity(mainIntent);
 
         } else {
-            // Snack Bar to show error message that record already exists
-//            Snackbar.make(nestedScrollView, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show();
             Toast.makeText( getBaseContext(), "User registration error!",Toast.LENGTH_LONG).show();
         }
     }

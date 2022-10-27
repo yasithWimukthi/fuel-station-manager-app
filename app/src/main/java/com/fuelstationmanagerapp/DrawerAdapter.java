@@ -27,7 +27,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
         this.holderFactories = new SparseArray<>();
         processViewTypes();
     }
-
     private void processViewTypes() {
         int type= 0;
         for(DrawerItem item  :items){

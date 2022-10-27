@@ -85,23 +85,15 @@ public class AddFuleStationFragment extends Fragment {
         call.enqueue(new Callback<FuelStation>() {
             @Override
             public void onResponse(Call<FuelStation> call, Response<FuelStation> response) {
-//                Toast.makeText(MainActivity.this, "Data added to API", Toast.LENGTH_SHORT).show();
-                System.out.println("success");
-
                 inputOwner.setText("");
                 inputName.setText("");
                 inputLocation.setText("");
-
                 FuelStation responseFromAPI = response.body();
-
-//                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
-//                responseTV.setText(responseString);
             }
 
             @Override
             public void onFailure(Call<FuelStation> call, Throwable t) {
                     System.out.println(t.getMessage());
-//                responseTV.setText("Error found is : " + t.getMessage());
             }
         });
     }
@@ -122,7 +114,6 @@ public class AddFuleStationFragment extends Fragment {
             public void onClick(View v) {
                 // validating if the text field is empty or not.
                 if (inputOwner.getText().toString().isEmpty() && inputName.getText().toString().isEmpty()  && inputLocation.getText().toString().isEmpty()) {
-//                    Toast.makeText(AddFuleStationFragment.this, "Please enter all the values", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // calling a method to post the data and passing variables.
