@@ -12,7 +12,11 @@ public class FuelQueue {
     private int count;
     private ArrayList<Customer> customers;
 
-    public FuelQueue(String fuelStationId,String fuelStationName, String fuelType, String vehicleType, String fuelStatus, int count, ArrayList<Customer> customers) {
+    public FuelQueue(String fuelStationId) {
+        this.fuelStationId = fuelStationId;
+    }
+
+    public FuelQueue(String fuelStationId, String fuelStationName, String fuelType, String vehicleType, String fuelStatus, int count, ArrayList<Customer> customers) {
         this.fuelStationId = fuelStationId;
         this.fuelStationName = fuelStationName;
         this.fuelType = fuelType;
