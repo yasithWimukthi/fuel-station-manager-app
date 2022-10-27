@@ -276,13 +276,19 @@ public class HomeFragment extends Fragment {
                 fuelQueueObj = response.body();
 
                 //added if condition to avoid multiple appends
-                if(fuelStationNameView.getText().toString().equals("Station Name")){
-                    fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
-                    fuelTypeView.append(": "+fuelQueueObj.getFuelType());
-                    vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
-                    fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
-                    vehicleCountView.append(": "+fuelQueueObj.getCount());
-                }
+
+                fuelStationNameView.setText("");
+                fuelTypeView.setText("");
+                vehicleTypeView.setText("");
+                fuelStatusView.setText("");
+                vehicleCountView.setText("");
+
+                fuelStationNameView.append("Station Name: "+fuelQueueObj.getFuelStationName());
+                fuelTypeView.append("Fuel Type: "+fuelQueueObj.getFuelType());
+                vehicleTypeView.append("Vehicle Type: "+fuelQueueObj.getVehicleType());
+                fuelStatusView.append("Fuel Status: "+fuelQueueObj.getFuelStatus());
+                vehicleCountView.append("Num of Vehicles: "+fuelQueueObj.getCount());
+
                 customerList = fuelQueueObj.getCustomers();
 
                 //display customer list in card view
