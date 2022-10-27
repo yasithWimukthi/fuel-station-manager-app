@@ -1,5 +1,7 @@
 package com.fuelstationmanagerapp;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -50,6 +55,18 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
     private BottomNavigationView bottomNavBar;
     Toolbar toolbar;
 
+    // creating constant keys for shared preferences.
+    public static final String SHARED_PREFS = "shared_prefs";
+
+    // key for storing email.
+    public static final String EMAIL_KEY = "email_key";
+
+    // key for storing username.
+    public static final String NAME_KEY = "name_key";
+
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +75,10 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
+
+        // initializing our shared preferences.
+        sharedpreferences = getApplicationContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+
         try{
             setSupportActionBar(toolbar);
         }catch(IllegalStateException e){
@@ -154,6 +175,14 @@ public class MainActivity extends AppCompatActivity  implements DrawerAdapter.On
             FuelStationsFragment fuelStationsFragment = new FuelStationsFragment();
             transaction.replace(R.id.container, fuelStationsFragment);
         }else{
+            // calling method to edit values in shared prefs.
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+
+            editor.clear();
+            editor.apply();
+
+            Intent i = new Intent(MainActivity.this, LoginScreen.class);
+            startActivity(i);
             finish();
         }
 
