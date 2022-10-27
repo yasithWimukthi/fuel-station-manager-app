@@ -19,6 +19,7 @@ import com.fuelstationmanagerapp.dbModel.Customer;
 import com.fuelstationmanagerapp.dbModel.StationStatus;
 import com.fuelstationmanagerapp.model.FuelStation;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,6 +143,7 @@ public class FuelStationsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<StationStatus>> call, Throwable t) {
+                TastyToast.makeText(getContext(), "Fuel stations can not be fetched. " + t.getMessage(), TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
         });

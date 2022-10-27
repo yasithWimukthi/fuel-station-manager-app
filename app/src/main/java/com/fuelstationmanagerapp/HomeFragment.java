@@ -27,6 +27,7 @@ import com.fuelstationmanagerapp.dbModel.NameObj;
 import com.fuelstationmanagerapp.dbModel.SingleQueueObject;
 import com.fuelstationmanagerapp.model.QueueItem;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -309,11 +310,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getContext(), "Joined the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
         });
     }
@@ -326,11 +329,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getContext(), "Exited the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
         });
@@ -344,11 +349,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getContext(), "Exited the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
         });
