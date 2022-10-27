@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.fuelstationmanagerapp.dbModel.FuelStation;
 import com.fuelstationmanagerapp.retrofit.Api;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,6 +90,7 @@ public class AddFuleStationFragment extends Fragment {
                 inputName.setText("");
                 inputLocation.setText("");
                 FuelStation responseFromAPI = response.body();
+                TastyToast.makeText(getContext(), "Fuel Station Was Saved Successfully.", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             }
 
             @Override
