@@ -19,12 +19,14 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.fuelstationmanagerapp.dbModel.StationStatus;
-import com.fuelstationmanagerapp.dbModel.StationStatus;
 import com.fuelstationmanagerapp.retrofit.RetrofitClient;
 import com.sdsmdg.tastytoast.TastyToast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +40,10 @@ import retrofit2.Response;
 public class UpdateFuelStatusFragment extends Fragment {
 
     private String id = "635191023374b23e5984df0b";
+//    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EE MMM d y H:m:s");
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,7 +54,7 @@ public class UpdateFuelStatusFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String status[] = {"Available", "Not Available"};
+    private String status[] = {"available", "finished"};
 
     private AutoCompleteTextView petrolStatusAutoCompleteTextView;
     private AutoCompleteTextView dieselStatusAutoCompleteTextView;
@@ -71,6 +77,8 @@ public class UpdateFuelStatusFragment extends Fragment {
     private String gasolineStatus;
 
     StationStatus stationStatusObj = new StationStatus();
+    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
 
     public UpdateFuelStatusFragment() {
         // Required empty public constructor
@@ -248,11 +256,8 @@ public class UpdateFuelStatusFragment extends Fragment {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         calendar.set(Calendar.MINUTE, minute);
-
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
-
+//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
                         date_time_in.setText(simpleDateFormat.format(calendar.getTime()));
-
                     }
                 };
 
@@ -267,10 +272,14 @@ public class UpdateFuelStatusFragment extends Fragment {
     public StationStatus createStatusObject(){
         StationStatus stationStatus = new StationStatus();
 
+        stationStatus.setName(stationNameText.getText().toString());
+        stationStatus.setLocation(locationNameText.getText().toString());
+
         stationStatus.setPetrolStatus(petrolStatus);
         stationStatus.setDieselStatus(dieselStatus);
         stationStatus.setGasolineStatus(gasolineStatus);
 
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EE MMM d y H:m:s ZZZ");
         stationStatus.setPetrolArrivalTime(inputPetrolArrivalTimeEditText.getText().toString());
         stationStatus.setDieselArrivalTime(inputDieselArrivalTimeEditText.getText().toString());
         stationStatus.setGasolineArrivalTime(inputGasolineArrivalTimeEditText.getText().toString());
@@ -293,13 +302,17 @@ public class UpdateFuelStatusFragment extends Fragment {
                 System.out.println(response.body());
                 stationNameText.setText(stationStatusObj.getName());
                 locationNameText.setText(stationStatusObj.getLocation());
-                inputPetrolArrivalTimeEditText.setText(stationStatusObj.getPetrolArrivalTime());
-                inputPetrolFinishTimeEditText.setText(stationStatusObj.getPetrolFinishedTime());
-                inputDieselArrivalTimeEditText.setText(stationStatusObj.getDieselArrivalTime());
-                inputDieselFinishTimeEditText.setText(stationStatusObj.getDieselFinishedTime());
-                inputGasolineArrivalTimeEditText.setText(stationStatusObj.getGasolineArrivalTime());
-                inputGasolineFinishTimeEditText.setText(stationStatusObj.getGasolineFinishedTime());
+                petrolStatusAutoCompleteTextView.setText(stationStatusObj.getPetrolStatus(), false);
+                dieselStatusAutoCompleteTextView.setText(stationStatusObj.getDieselStatus(), false);
+                gasolineStatusAutoCompleteTextView.setText(stationStatusObj.getGasolineStatus(), false);
 
+                inputPetrolArrivalTimeEditText.setText(formatDate(stationStatusObj.getPetrolArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getPetrolArrivalTime()).toString().length() - 14));
+                inputPetrolFinishTimeEditText.setText(formatDate(stationStatusObj.getPetrolFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getPetrolFinishedTime()).toString().length() - 14));
+
+                inputDieselArrivalTimeEditText.setText(formatDate(stationStatusObj.getDieselArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getDieselArrivalTime()).toString().length() - 14));
+                inputDieselFinishTimeEditText.setText(formatDate(stationStatusObj.getDieselFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getDieselFinishedTime()).toString().length() - 14));
+                inputGasolineArrivalTimeEditText.setText(formatDate(stationStatusObj.getGasolineArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getGasolineArrivalTime()).toString().length() - 14));
+                inputGasolineFinishTimeEditText.setText(formatDate(stationStatusObj.getGasolineFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getGasolineFinishedTime()).toString().length() - 14));
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
@@ -315,13 +328,6 @@ public class UpdateFuelStatusFragment extends Fragment {
     //API call
     public void setFuelStatus(){
         StationStatus stationStatus = createStatusObject();
-
-        System.out.println(stationStatus.getPetrolStatus());
-        System.out.println(stationStatus.getPetrolArrivalTime());
-        System.out.println(stationStatus.getPetrolFinishedTime());
-        System.out.println(stationStatus.getDieselStatus());
-
-
         Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().setFuelStatus(id, stationStatus);
         call.enqueue(new Callback<StationStatus>() {
             @Override
@@ -340,5 +346,19 @@ public class UpdateFuelStatusFragment extends Fragment {
 
         });
     }
+
+
+    public Date formatDate(String petrolFinishedTime) {
+        Date date = null;
+        try {
+            date = inputFormat.parse(petrolFinishedTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+
+
 
 }
