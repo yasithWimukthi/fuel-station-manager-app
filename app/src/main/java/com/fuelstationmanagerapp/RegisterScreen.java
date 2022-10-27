@@ -23,6 +23,7 @@ import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
 import com.fuelstationmanagerapp.sql.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
+import com.sdsmdg.tastytoast.TastyToast;
 
 public class RegisterScreen extends AppCompatActivity implements View.OnClickListener{
 
@@ -170,7 +171,7 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
 
         if (rg.getCheckedRadioButtonId() == -1)
         {
-            Toast.makeText( getBaseContext(), "Please select a user type!",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "Please select a user type!", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             return;
         }
 
@@ -192,13 +193,12 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
             editor.apply();
 
             Intent mainIntent = new Intent(activity, MainActivity.class);
-
-            Toast.makeText( getBaseContext(), "User registered successfully",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "User registered successfully", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             emptyInputEditText();
             startActivity(mainIntent);
 
         } else {
-            Toast.makeText( getBaseContext(), "User registration error!",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "User already exists with same email", TastyToast.LENGTH_LONG, TastyToast.ERROR);
         }
     }
         /**
