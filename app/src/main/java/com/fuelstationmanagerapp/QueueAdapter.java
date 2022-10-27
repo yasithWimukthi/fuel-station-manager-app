@@ -41,11 +41,15 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Customer queueItem = queueItems[position];
         holder.textViewName.setText(queueItem.getCustomerName());
-        holder.textViewDate.setText(queueItem.getArrivalTime());
-        holder.textViewDepartTime.setText(queueItem.getDepartTime());
-        holder.textViewStatus.setText(queueItem.getStatus());
+
+        holder.textViewDate.setText("Arrived at: "+ queueItem.getArrivalTime());
+        holder.textViewStatus.setText("Status: "+ queueItem.getStatus());
+        if(queueItem.getDepartTime()!=null){
+            holder.textViewDepartTime.setText("Left at: "+ queueItem.getDepartTime());
+        }
+
         if(!queueItem.getStatus().equals("in")){
-//            holder.statusImageView.setImageDrawable(R.drawable.ic_baseline_circle_red);
+//            holder.statusImageView.setImageResource(R.drawable.ic_baseline_circle_red);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

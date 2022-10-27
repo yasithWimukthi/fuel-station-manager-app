@@ -4,14 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class FuelStation {
 
-    private String name;
     private String owner;
+    private String name;
     private String location;
 
 
-    public FuelStation(String name, String owner, String location) {
-        this.name = name;
+    public FuelStation(String owner, String name, String location) {
         this.owner = owner;
+        this.name = name;
         this.location = location;
 
     }

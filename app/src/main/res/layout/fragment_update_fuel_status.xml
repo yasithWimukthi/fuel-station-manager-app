@@ -94,7 +94,7 @@
             android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="Name"
+            android:text="Location"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/inputName"/>
 
