@@ -76,6 +76,7 @@
             android:id="@+id/nameErrors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="TextView"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="@+id/inputName"
@@ -98,12 +99,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputName" />
+            app:layout_constraintTop_toBottomOf="@+id/nameErrors" />
 
         <TextView
             android:id="@+id/emailErrors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="TextView"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="@+id/inputEmail"
@@ -126,13 +128,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/emailErrors" />
 
         <TextView
             android:id="@+id/passwordErrors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:layout_marginTop="8dp"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="@+id/inputPassword"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
@@ -154,12 +157,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordErrors" />
 
         <TextView
             android:id="@+id/confPasswordErrors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="TextView"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="@+id/confirmPassword"
@@ -170,13 +174,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/btnRegister"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputPassword">
+            app:layout_constraintTop_toBottomOf="@+id/confPasswordErrors">
 
             <RadioButton
                 android:layout_width="wrap_content"
