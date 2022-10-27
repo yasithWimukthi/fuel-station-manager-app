@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +83,8 @@ public class HomeFragment extends Fragment {
     private ArrayAdapter<String> queueTypeAdapter;
     private ArrayAdapter<String> fuelStationAdapter;
     private ArrayAdapter<String> fuelTypeAdapter;
+    private CardView statusCardView;
+    private ImageView emptyImage;
     private String queueType;
     private String fuelStation;
     private String fuelType;
@@ -144,6 +148,8 @@ public class HomeFragment extends Fragment {
         queueRecyclerView = v.findViewById(R.id.queueRecyclerView);
         queueTypeAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.queueTypeInput);
         fuelTypeAutoCompleteTextView = (AutoCompleteTextView) getView().findViewById(R.id.fuelTypeInput);
+        statusCardView = (CardView) getView().findViewById(R.id.statusCardView);
+        emptyImage = (ImageView) getView().findViewById(R.id.emptyImage);
         queueTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, queueTypes);
         fuelTypeAdapter = new ArrayAdapter<String>(getContext(), R.layout.dropdown_list_item, fuelTypes);
         queueTypeAutoCompleteTextView.setAdapter(queueTypeAdapter);
@@ -162,6 +168,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getFuelQueues(fuelStation, queueType, fuelType);
+                emptyImage.setVisibility(View.GONE);
+                statusCardView.setVisibility(View.VISIBLE);
+                queueRecyclerView.setVisibility(View.VISIBLE);
+                joinQueue.setVisibility(View.VISIBLE);
+                exitBefore.setVisibility(View.VISIBLE);
+                exitAfter.setVisibility(View.VISIBLE);
             }
         });
         //find buttons join and update queue buttons by id
