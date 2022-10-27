@@ -1,5 +1,7 @@
 package com.fuelstationmanagerapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,6 +32,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class AddFuleStationFragment extends Fragment {
+
+    // creating constant keys for shared preferences.
+    public static final String SHARED_PREFS = "shared_prefs";
+
+    // key for storing email.
+    public static final String EMAIL_KEY = "email_key";
+
+    // key for storing username.
+    public static final String NAME_KEY = "name_key";
+
+    // variable for shared preferences.
+    SharedPreferences sharedpreferences;
+    String email;
+    String name;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,7 +87,12 @@ public class AddFuleStationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        // initializing our shared preferences.
+        sharedpreferences = getActivity().getApplicationContext().getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
 
+        // storing it in our string variable.
+        email = sharedpreferences.getString(EMAIL_KEY, null);
+        name = sharedpreferences.getString(NAME_KEY, null);
     }
 
     private void postData(String owner, String sName, String location) {
@@ -108,6 +129,11 @@ public class AddFuleStationFragment extends Fragment {
         inputName = getView().findViewById(R.id.inputName);
         inputLocation = getView().findViewById(R.id.inputLocation);
         btnAdd = getView().findViewById(R.id.btnAdd);
+
+        //adding input owner from session
+        inputOwner.setText(name);
+        inputOwner.setEnabled(false);
+
 
         // adding on click listener to the button.
         btnAdd.setOnClickListener(new View.OnClickListener() {
