@@ -31,15 +31,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddFuleStationFragment extends Fragment {
 
-    //add fuel station
-    private EditText inputOwner, inputName, inputLocation;
-    private Button btnAdd;
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    //add fuel station
+    private EditText inputOwner, inputName, inputLocation;
+    private Button btnAdd;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -95,7 +93,8 @@ public class AddFuleStationFragment extends Fragment {
 
             @Override
             public void onFailure(Call<FuelStation> call, Throwable t) {
-                    System.out.println(t.getMessage());
+                System.out.println(t.getMessage());
+                TastyToast.makeText(getContext(), "Fuel Station Was Not Saved.", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
         });
     }
@@ -115,7 +114,7 @@ public class AddFuleStationFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // validating if the text field is empty or not.
-                if (inputOwner.getText().toString().isEmpty() && inputName.getText().toString().isEmpty()  && inputLocation.getText().toString().isEmpty()) {
+                if (inputOwner.getText().toString().isEmpty() && inputName.getText().toString().isEmpty() && inputLocation.getText().toString().isEmpty()) {
                     return;
                 }
                 // calling a method to post the data and passing variables.
