@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.fuelstationmanagerapp.helpers.InputValidation;
 import com.fuelstationmanagerapp.model.User;
 import com.fuelstationmanagerapp.sql.DatabaseHelper;
+import com.sdsmdg.tastytoast.TastyToast;
 
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener{
 
@@ -147,10 +148,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
             Intent mainIntent = new Intent(activity, MainActivity.class);
             emptyInputEditText();
-            Toast.makeText( getBaseContext(), "User login success!",Toast.LENGTH_LONG).show();
+            TastyToast.makeText(getApplicationContext(), "User login success!", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             startActivity(mainIntent);
         } else {
-            Toast.makeText( getBaseContext(), "User login failed!",Toast.LENGTH_LONG).show();
+            // Snack Bar to show success message that record is wrong
+            TastyToast.makeText(getApplicationContext(), "User login failed!", TastyToast.LENGTH_LONG, TastyToast.ERROR);
         }
     }
 
