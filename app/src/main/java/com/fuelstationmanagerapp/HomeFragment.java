@@ -276,13 +276,19 @@ public class HomeFragment extends Fragment {
                 fuelQueueObj = response.body();
 
                 //added if condition to avoid multiple appends
-                if(fuelStationNameView.getText().toString().equals("Station Name")){
-                    fuelStationNameView.append(": "+fuelQueueObj.getFuelStationName());
-                    fuelTypeView.append(": "+fuelQueueObj.getFuelType());
-                    vehicleTypeView.append(": "+fuelQueueObj.getVehicleType());
-                    fuelStatusView.append(": "+fuelQueueObj.getFuelStatus());
-                    vehicleCountView.append(": "+fuelQueueObj.getCount());
-                }
+
+                fuelStationNameView.setText("");
+                fuelTypeView.setText("");
+                vehicleTypeView.setText("");
+                fuelStatusView.setText("");
+                vehicleCountView.setText("");
+
+                fuelStationNameView.append("Station Name: "+fuelQueueObj.getFuelStationName());
+                fuelTypeView.append("Fuel Type: "+fuelQueueObj.getFuelType());
+                vehicleTypeView.append("Vehicle Type: "+fuelQueueObj.getVehicleType());
+                fuelStatusView.append("Fuel Status: "+fuelQueueObj.getFuelStatus());
+                vehicleCountView.append("Num of Vehicles: "+fuelQueueObj.getCount());
+
                 customerList = fuelQueueObj.getCustomers();
 
                 //display customer list in card view
@@ -321,13 +327,12 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Joined the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                getFuelQueues(fuelStation, queueType, fuelType);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
         });
@@ -340,13 +345,12 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Exited the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                getFuelQueues(fuelStation, queueType, fuelType);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
@@ -360,13 +364,12 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Exited the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                getFuelQueues(fuelStation, queueType, fuelType);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
