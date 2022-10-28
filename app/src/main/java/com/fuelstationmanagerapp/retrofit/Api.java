@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
-    public static String BASE_URL = "http://192.168.1.10:4001/api/v1/";
+    public static String BASE_URL = "http://192.168.1.110:4001/api/v1/";
 
     //API method to create fuel station
     @POST("fuelStations")
