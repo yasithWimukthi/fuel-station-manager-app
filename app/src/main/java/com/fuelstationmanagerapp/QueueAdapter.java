@@ -42,10 +42,24 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
         final Customer queueItem = queueItems[position];
         holder.textViewName.setText(queueItem.getCustomerName());
 
+        String status = null;
+        if(queueItem.getStatus().equals("in"))
+            status = "In Queue";
+        if(queueItem.getStatus().equals("pumped"))
+            status = "Pumped Fuel";
+        if(queueItem.getStatus().equals("notPumped"))
+            status = "Did not pump Fuel";
+
         holder.textViewDate.setText("Arrived at: "+ queueItem.getArrivalTime());
-        holder.textViewStatus.setText("Status: "+ queueItem.getStatus());
+
+        if(status!=null){
+            holder.textViewStatus.setText(status);
+        }
+
         if(queueItem.getDepartTime()!=null){
             holder.textViewDepartTime.setText("Left at: "+ queueItem.getDepartTime());
+        }else {
+            holder.textViewDepartTime.setText("");
         }
 
         if(!queueItem.getStatus().equals("in")){

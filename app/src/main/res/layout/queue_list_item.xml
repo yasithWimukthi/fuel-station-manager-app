@@ -44,16 +44,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_height="wrap_content"
-
                     android:text="Join Time" />
-
-                <TextView
-                    android:id="@+id/departTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Left at" />
 
                 <TextView
                     android:id="@+id/textStatus"
@@ -62,6 +53,14 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="5dp"
                     android:text="Status" />
+
+                <TextView
+                    android:id="@+id/departTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Left at" />
 
             </LinearLayout>
 

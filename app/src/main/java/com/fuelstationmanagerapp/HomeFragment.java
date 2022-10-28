@@ -284,10 +284,30 @@ public class HomeFragment extends Fragment {
                 vehicleCountView.setText("");
 
                 fuelStationNameView.append("Station Name: "+fuelQueueObj.getFuelStationName());
-                fuelTypeView.append("Fuel Type: "+fuelQueueObj.getFuelType());
-                vehicleTypeView.append("Vehicle Type: "+fuelQueueObj.getVehicleType());
-                fuelStatusView.append("Fuel Status: "+fuelQueueObj.getFuelStatus());
+
+                if(fuelQueueObj.getFuelArrivalTime()==null){
+                    fuelTypeView.append("Arrival: Not Updated");
+                }
+                else {
+                    fuelTypeView.append("Arrival: "+fuelQueueObj.getFuelArrivalTime());
+                }
+
+                if(fuelQueueObj.getFuelDepartureTime()==null){
+                    vehicleTypeView.append("Finishing: Not Updated");
+                }
+                else {
+                    vehicleTypeView.append("Finishing: "+fuelQueueObj.getFuelDepartureTime());
+                }
+
+                if(fuelQueueObj.getFuelStatus()==null){
+                    fuelStatusView.append("Fuel Status: Not Updated");
+                }
+                else {
+                    fuelStatusView.append("Fuel Status: "+fuelQueueObj.getFuelStatus());
+                }
+
                 vehicleCountView.append("Num of Vehicles: "+fuelQueueObj.getCount());
+
 
                 customerList = fuelQueueObj.getCustomers();
 
