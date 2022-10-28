@@ -147,7 +147,6 @@ public class RegisterScreen extends AppCompatActivity implements View.OnClickLis
      * This method is to validate the input text fields and post data to SQLite
      */
     private void postDataToSQLite() {
-//        Log.i("hey", "hey");
         if (!inputValidation.isInputEditTextFilled(editTextName, nameErrors, getString(R.string.name_empty))) {
             return;
         }
