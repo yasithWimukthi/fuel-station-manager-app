@@ -327,6 +327,13 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
+
+                SingleQueueObject obj = new SingleQueueObject();
+                obj = response.body();
+                System.out.println("hfbf hsfbsjfs sjfshfj sd"+response.body());
+                if(obj.get_id().equals("0")){
+                    TastyToast.makeText(getContext(), "You are already in the petrol queue", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                }
                 TastyToast.makeText(getContext(), "Joined the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
                 getFuelQueues(fuelStation, queueType, fuelType);
             }

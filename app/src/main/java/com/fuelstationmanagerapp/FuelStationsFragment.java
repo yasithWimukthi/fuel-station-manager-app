@@ -2,6 +2,7 @@ package com.fuelstationmanagerapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -125,11 +126,22 @@ public class FuelStationsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<StationStatus>> call, Response<List<StationStatus>> response) {
                 fuelStationList = response.body();
-                System.out.println("fuelStationList");
-                System.out.println(fuelStationList);
 
-                fuelStationList = response.body();
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    fuelStationList.forEach((fuelStation) -> {
+                        System.out.println(fuelStation);
+                        System.out.println(fuelStation);
+                        if(fuelStation.getPetrolStatus()==null){
+                            fuelStation.setPetrolStatus("Not updated");
+                        }
+                        if(fuelStation.getDieselStatus()==null){
+                            fuelStation.setDieselStatus("Not updated");
+                        }
+                        if(fuelStation.getGasolineStatus()==null){
+                            fuelStation.setGasolineStatus("Not updated");
+                        }
+                    });
+                }
                 //display customer list in card view
                 StationStatus[] stationStatuses = new StationStatus[fuelStationList.size()];
 
