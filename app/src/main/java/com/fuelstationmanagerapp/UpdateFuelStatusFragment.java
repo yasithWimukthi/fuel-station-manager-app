@@ -352,15 +352,11 @@ public class UpdateFuelStatusFragment extends Fragment {
         call.enqueue(new Callback<StationStatus>() {
             @Override
             public void onResponse(Call<StationStatus> call, Response<StationStatus> response) {
-                System.out.println("update success");
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Update Success", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
             }
 
             @Override
             public void onFailure(Call<StationStatus> call, Throwable t) {
-                System.out.println("update failed");
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Update Failed", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 

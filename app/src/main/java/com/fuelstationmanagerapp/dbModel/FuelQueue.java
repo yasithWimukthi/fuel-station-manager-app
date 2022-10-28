@@ -9,6 +9,10 @@ public class FuelQueue {
     private String fuelType;
     private String vehicleType;
     private String fuelStatus;
+
+    private String fuelArrivalTime;
+    private String fuelDepartureTime;
+
     private int count;
     private ArrayList<Customer> customers;
 
@@ -16,12 +20,40 @@ public class FuelQueue {
         this.fuelStationId = fuelStationId;
     }
 
-    public FuelQueue(String fuelStationId, String fuelStationName, String fuelType, String vehicleType, String fuelStatus, int count, ArrayList<Customer> customers) {
+//    public FuelQueue(String fuelStationId, String fuelStationName, String fuelType, String vehicleType, String fuelStatus, int count, ArrayList<Customer> customers) {
+//        this.fuelStationId = fuelStationId;
+//        this.fuelStationName = fuelStationName;
+//        this.fuelType = fuelType;
+//        this.vehicleType = vehicleType;
+//        this.fuelStatus = fuelStatus;
+//        this.count = count;
+//        this.customers = customers;
+//    }
+
+    public String getFuelArrivalTime() {
+        return fuelArrivalTime;
+    }
+
+    public void setFuelArrivalTime(String fuelArrivalTime) {
+        this.fuelArrivalTime = fuelArrivalTime;
+    }
+
+    public String getFuelDepartureTime() {
+        return fuelDepartureTime;
+    }
+
+    public void setFuelDepartureTime(String fuelDepartureTime) {
+        this.fuelDepartureTime = fuelDepartureTime;
+    }
+
+    public FuelQueue(String fuelStationId, String fuelStationName, String fuelType, String vehicleType, String fuelStatus, String fuelArrivalTime, String fuelDepartureTime, int count, ArrayList<Customer> customers) {
         this.fuelStationId = fuelStationId;
         this.fuelStationName = fuelStationName;
         this.fuelType = fuelType;
         this.vehicleType = vehicleType;
         this.fuelStatus = fuelStatus;
+        this.fuelArrivalTime = fuelArrivalTime;
+        this.fuelDepartureTime = fuelDepartureTime;
         this.count = count;
         this.customers = customers;
     }
