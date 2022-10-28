@@ -39,7 +39,7 @@ import retrofit2.Response;
  */
 public class UpdateFuelStatusFragment extends Fragment {
 
-    private String id = "635191023374b23e5984df0b";
+//    private String id = "635191023374b23e5984df0b";
 //    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EE MMM d y H:m:s");
 
@@ -293,7 +293,8 @@ public class UpdateFuelStatusFragment extends Fragment {
 
     //API call
     public void getFuelStation(){
-        Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().getSingleFuelStation(id);
+        System.out.println("fsfsfsnlfsklfjslkdklskfpskfl;skfopjksopfsopfk"+FuelStationAdapter._id);
+        Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().getSingleFuelStation(FuelStationAdapter._id);
         call.enqueue(new Callback<StationStatus>() {
             @Override
             public void onResponse(Call<StationStatus> call, Response<StationStatus> response) {
@@ -302,17 +303,36 @@ public class UpdateFuelStatusFragment extends Fragment {
                 System.out.println(response.body());
                 stationNameText.setText(stationStatusObj.getName());
                 locationNameText.setText(stationStatusObj.getLocation());
-                petrolStatusAutoCompleteTextView.setText(stationStatusObj.getPetrolStatus(), false);
-                dieselStatusAutoCompleteTextView.setText(stationStatusObj.getDieselStatus(), false);
-                gasolineStatusAutoCompleteTextView.setText(stationStatusObj.getGasolineStatus(), false);
 
-                inputPetrolArrivalTimeEditText.setText(formatDate(stationStatusObj.getPetrolArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getPetrolArrivalTime()).toString().length() - 14));
-                inputPetrolFinishTimeEditText.setText(formatDate(stationStatusObj.getPetrolFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getPetrolFinishedTime()).toString().length() - 14));
+                if(stationStatusObj.getPetrolStatus()!=null){
+                    petrolStatusAutoCompleteTextView.setText(stationStatusObj.getPetrolStatus(), false);
+                }
+                if(stationStatusObj.getDieselStatus()!=null){
+                    petrolStatusAutoCompleteTextView.setText(stationStatusObj.getDieselStatus(), false);
+                }
+                if(stationStatusObj.getGasolineStatus()!=null){
+                    petrolStatusAutoCompleteTextView.setText(stationStatusObj.getGasolineStatus(), false);
+                }
+                if(stationStatusObj.getPetrolArrivalTime()!=null){
+                    inputPetrolArrivalTimeEditText.setText(formatDate(stationStatusObj.getPetrolArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getPetrolArrivalTime()).toString().length() - 14));
+                }
+                if(stationStatusObj.getPetrolFinishedTime()!=null){
+                    inputPetrolFinishTimeEditText.setText(formatDate(stationStatusObj.getPetrolFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getPetrolFinishedTime()).toString().length() - 14));
+                }
+                if(stationStatusObj.getDieselArrivalTime()!=null){
+                    inputDieselArrivalTimeEditText.setText(formatDate(stationStatusObj.getDieselArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getDieselArrivalTime()).toString().length() - 14));
+                }
+                if(stationStatusObj.getDieselFinishedTime()!=null){
+                    inputDieselFinishTimeEditText.setText(formatDate(stationStatusObj.getDieselFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getDieselFinishedTime()).toString().length() - 14));
+                }
+                if(stationStatusObj.getGasolineArrivalTime()!=null){
+                    inputGasolineArrivalTimeEditText.setText(formatDate(stationStatusObj.getGasolineArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getGasolineArrivalTime()).toString().length() - 14));
+                }
+                if(stationStatusObj.getGasolineFinishedTime()!=null){
+                    inputGasolineFinishTimeEditText.setText(formatDate(stationStatusObj.getGasolineFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getGasolineFinishedTime()).toString().length() - 14));
+                }
 
-                inputDieselArrivalTimeEditText.setText(formatDate(stationStatusObj.getDieselArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getDieselArrivalTime()).toString().length() - 14));
-                inputDieselFinishTimeEditText.setText(formatDate(stationStatusObj.getDieselFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getDieselFinishedTime()).toString().length() - 14));
-                inputGasolineArrivalTimeEditText.setText(formatDate(stationStatusObj.getGasolineArrivalTime()).toString().substring(0, formatDate(stationStatusObj.getGasolineArrivalTime()).toString().length() - 14));
-                inputGasolineFinishTimeEditText.setText(formatDate(stationStatusObj.getGasolineFinishedTime()).toString().substring(0, formatDate(stationStatusObj.getGasolineFinishedTime()).toString().length() - 14));
+
 //                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 
@@ -328,7 +348,7 @@ public class UpdateFuelStatusFragment extends Fragment {
     //API call
     public void setFuelStatus(){
         StationStatus stationStatus = createStatusObject();
-        Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().setFuelStatus(id, stationStatus);
+        Call<StationStatus> call = RetrofitClient.getInstance().getMyApi().setFuelStatus(FuelStationAdapter._id, stationStatus);
         call.enqueue(new Callback<StationStatus>() {
             @Override
             public void onResponse(Call<StationStatus> call, Response<StationStatus> response) {

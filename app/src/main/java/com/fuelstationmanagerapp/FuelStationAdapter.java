@@ -20,7 +20,7 @@ import com.fuelstationmanagerapp.model.FuelStation;
 public class FuelStationAdapter extends RecyclerView.Adapter<FuelStationAdapter.ViewHolder>{
     private Context context;
     private StationStatus[] fuelStations;
-    private String _id;
+    public static String _id;
 
     public FuelStationAdapter(Context context, StationStatus[] fuelStations) {
         this.context = context;
