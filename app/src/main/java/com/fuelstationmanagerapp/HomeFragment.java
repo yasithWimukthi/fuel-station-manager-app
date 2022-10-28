@@ -327,13 +327,12 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Joined the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                getFuelQueues(fuelStation, queueType, fuelType);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
         });
@@ -346,13 +345,12 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Exited the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                getFuelQueues(fuelStation, queueType, fuelType);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
@@ -366,13 +364,12 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<SingleQueueObject>() {
             @Override
             public void onResponse(Call<SingleQueueObject> call, Response<SingleQueueObject> response) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "Exited the queue", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                getFuelQueues(fuelStation, queueType, fuelType);
             }
 
             @Override
             public void onFailure(Call<SingleQueueObject> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getContext(), "An error has occurred", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             }
 
