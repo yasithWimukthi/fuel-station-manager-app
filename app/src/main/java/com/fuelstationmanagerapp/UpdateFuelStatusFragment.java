@@ -40,6 +40,8 @@ import retrofit2.Response;
 public class UpdateFuelStatusFragment extends Fragment {
 
     private String id = "635191023374b23e5984df0b";
+
+    String _id = FuelStationAdapter._id;
 //    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm");
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EE MMM d y H:m:s");
 
