@@ -49,7 +49,7 @@ public class QueueAdapter extends RecyclerView.Adapter<QueueAdapter.ViewHolder> 
         }
 
         if(!queueItem.getStatus().equals("in")){
-//            holder.statusImageView.setImageResource(R.drawable.ic_baseline_circle_red);
+            holder.textViewName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_circle_red, 0, 0, 0);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

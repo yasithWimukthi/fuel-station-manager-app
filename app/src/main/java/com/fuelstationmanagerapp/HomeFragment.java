@@ -330,7 +330,6 @@ public class HomeFragment extends Fragment {
 
                 SingleQueueObject obj = new SingleQueueObject();
                 obj = response.body();
-                System.out.println("hfbf hsfbsjfs sjfshfj sd"+response.body());
                 if(obj.get_id().equals("0")){
                     TastyToast.makeText(getContext(), "You are already in the petrol queue", TastyToast.LENGTH_LONG, TastyToast.ERROR);
                 }
